@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_startswith.c                                    :+:      :+:    :+:   */
+/*   ft_create_elem.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 18:21:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 00:50:47 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/07/18 05:16:54 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/07/18 05:27:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib42.h"
+#include "ft_list.h"
 
-int	ft_startswith(char *str, char *startswith)
+t_list	*ft_create_elem(void *data)
 {
-	int	lstr;
-	int	lstart;
+	t_list *elem;
 
-	lstr = ft_strlen(str);
-	lstart = ft_strlen(startswith);
-	return (lstr < lstart ? 0 : ft_memcmp(startswith, str, lstart) == 0);
+	if ((elem = malloc(sizeof(t_list) * 1)) == NULL)
+		return (NULL);
+	elem->data = data;
+	elem->next = NULL;
+	return (elem);
 }

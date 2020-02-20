@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_startswith.c                                    :+:      :+:    :+:   */
+/*   ft_list_merge.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 18:21:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 00:50:47 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/07/25 11:00:49 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/07/25 17:21:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib42.h"
+#include "ft_list.h"
 
-int	ft_startswith(char *str, char *startswith)
+void	ft_list_merge(t_list **begin_list1, t_list *begin_list2)
 {
-	int	lstr;
-	int	lstart;
+	t_list *tmp;
 
-	lstr = ft_strlen(str);
-	lstart = ft_strlen(startswith);
-	return (lstr < lstart ? 0 : ft_memcmp(startswith, str, lstart) == 0);
+	if (*begin_list1 == NULL)
+		*begin_list1 = begin_list2;
+	else
+	{
+		tmp = *begin_list1;
+		while (tmp->next != NULL)
+			tmp = tmp->next;
+		tmp->next = begin_list2;
+	}
 }

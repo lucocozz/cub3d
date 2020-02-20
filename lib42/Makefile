@@ -32,14 +32,21 @@ STR=	ft_strlen.c			ft_strdup.c			ft_strchr.c				\
 		ft_strdel.c			ft_endswith.c		ft_startswith.c			\
 		ft_strsjoin.c
 
-MTX=	ft_free_matrice.c	ft_matrice_join.c	ft_matrice_len.c
+LST=	ft_create_elem.c	ft_list_at.c		ft_list_push_front.c	\
+		ft_list_clear.c		ft_list_last.c		ft_list_push_back.c		\
+		ft_list_merge.c		ft_list_reverse.c	ft_list_size.c			\
+		ft_list_print.c		ft_list_to_array.c
+
+MTX=	ft_free_matrice.c	ft_matrice_join.c	ft_matrice_len.c		\
+		ft_print_matrice.c
 
 SYS=	ft_exit_error.c
 
 SRCS=	$(addprefix memory/, $(MEM))	$(addprefix integer/, $(INT))	\
 		$(addprefix file/, $(FILE))	$(addprefix string/, $(STR))		\
 		$(addprefix file/ft_vfprintf/, $(PRINTF))						\
-		$(addprefix system/, $(SYS)) $(addprefix matrice/, $(MTX))
+		$(addprefix system/, $(SYS)) $(addprefix matrice/, $(MTX))		\
+		$(addprefix list/, $(LST))
 
 OBJS_S= $(SRCS:%.c=%.o)
 

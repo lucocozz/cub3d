@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_startswith.c                                    :+:      :+:    :+:   */
+/*   ft_list_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 18:21:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 00:50:47 by lucocozz         ###   ########.fr       */
+/*   Created: 2020/02/20 04:15:07 by lucocozz          #+#    #+#             */
+/*   Updated: 2020/02/20 04:55:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-int	ft_startswith(char *str, char *startswith)
+char	**ft_list_to_array(t_list **alst)
 {
-	int	lstr;
-	int	lstart;
+	int		i;
+	t_list	*lst;
+	t_list	*next;
+	char	**array;
 
-	lstr = ft_strlen(str);
-	lstart = ft_strlen(startswith);
-	return (lstr < lstart ? 0 : ft_memcmp(startswith, str, lstart) == 0);
+	i = 0;
+	lst = *alst;
+	if ((array = malloc(sizeof(char*) * (ft_list_size(lst) + 1))) == NULL)
+		return (NULL);
+	while (lst)
+	{
+		array[i++] = lst->data;
+		next = lst->next;
+		free(lst);
+		lst = next;
+	}
+	array[i] = NULL;
+	*alst = NULL;
+	return (array);
 }

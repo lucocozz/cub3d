@@ -6,35 +6,24 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 19:28:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/18 04:52:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/20 05:40:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_hash_table	g_color[N_COLORS] = {
-	{"F"}, {"C"}
-};
-
-void		ft_parse_color(t_parse_cub *cub_data, char **data)
+static char	*ft_get_row(char **data)
 {
-	int		i;
-	int		j;
-	char	**rgb;
+	int		len;
+	char	*row;
 
-	i = 0;
-	j = 0;
-	while (ft_strcmp(data[0], g_color[i].hash) && i < N_COLORS)
-		i++;
-	rgb = ft_split(data[1], ',');
-	((int *)(&cub_data->color))[i] += ft_atoi(rgb[0]) << 16;
-	((int *)(&cub_data->color))[i] += ft_atoi(rgb[1]) << 8;
-	((int *)(&cub_data->color))[i] += ft_atoi(rgb[2]);
-	ft_free_matrice((void **)data, 2);
-	ft_free_matrice((void **)rgb, 3);
+	len = ft_matrice_len(data);
+	row = ft_strsjoin(len, data, "");
+	ft_free_matrice((void**)data, len);
+	return (row);
 }
 
-static void	ft_wall_map(t_parse_cub *cub_data, char *row)
+static int	ft_top_bottom_map(char *row)
 {
 	int i;
 
@@ -42,33 +31,72 @@ static void	ft_wall_map(t_parse_cub *cub_data, char *row)
 	while (row[i])
 	{
 		if (row[i] != '1')
-		{
-			ft_strdel(row);
-			ft_free_cub_data(cub_data);
-			ft_exit_error("Invalide map.\n");
-		}
+			return (0);
 		i++;
 	}
+	return (ft_strlen(row));
+}
+
+static int	ft_middle_map(char *row)
+{
+	int	i;
+
+	i = 0;
+	if (!ft_strcmp(row, ""))
+		return (0);
+	if (row[i] != '1')
+		return (0);
+	while (row[i])
+	{
+		if (ft_strchr(MAP_DATA, row[i]) == NULL)
+			return (0);
+		i++;
+	}
+	if (row[i - 1] != '1')
+		return (0);
+	return (i);
+}
+
+static void	ft_check_map(t_parse_cub *cub_data, t_list **alst)
+{
+	int		len;
+	t_list	*lst;
+
+	lst = *alst;
+	cub_data->map.x = ft_top_bottom_map((char*)lst->data);
+	if (!cub_data->map.x)
+		ft_exit_parse_map("Map doesn't open proprly.\n", cub_data, *alst);
+	lst = lst->next;
+	cub_data->map.y++;
+	while (lst->next)
+	{
+		len = ft_middle_map((char*)lst->data);
+		if (len != cub_data->map.x)
+			ft_exit_parse_map("Map have bad charactere.\n", cub_data, *alst);
+		cub_data->map.y++;
+		lst = lst->next;
+	}
+	if (ft_top_bottom_map((char*)lst->data) == 0)
+		ft_exit_parse_map("Map doesn't close proprely.\n", cub_data, *alst);
+	cub_data->map.y++;
 }
 
 void		ft_parse_map(t_parse_cub *cub_data, char **data, int fd)
 {
 	int			i;
-	int			len;
-	char		*row;
+	char		*line;
+	t_list		*lst_map;
 
 	i = 0;
-	row = ft_strsjoin(ft_matrice_len(data), data, "");
-	len = ft_strlen(row);
-	ft_free_matrice((void**)data, ft_matrice_len(data));
-	ft_wall_map(cub_data, row);
-	ft_matrice_join(cub_data->map.array, row, cub_data->map.y++);
-	ft_strdel(row);
-	while (get_next_line(fd, &row))
+	lst_map = NULL;
+	(void)cub_data;
+	ft_list_push_back(&lst_map, (void*)ft_get_row(data));
+	while (get_next_line(fd, &line))
 	{
-
-		ft_strdel(row);
+		ft_list_push_back(&lst_map, (void*)ft_get_row(ft_split(line, ' ')));
+		ft_strdel(line);
 	}
+	ft_check_map(cub_data, &lst_map);
+	cub_data->map.array = ft_list_to_array(&lst_map);
+	ft_strdel(line);
 }
-
-// passer la map en list chainee

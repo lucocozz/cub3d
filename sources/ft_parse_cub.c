@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/18 04:05:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/20 03:04:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,26 @@ static t_hash_table	g_texture[N_TEXTURES] = {
 	{"NO"}, {"SO"}, {"WE"}, {"EA"}, {"S"}
 };
 
-void		ft_free_cub_data(t_parse_cub *cub_data)
+static t_hash_table	g_color[N_COLORS] = {
+	{"F"}, {"C"}
+};
+
+void		ft_parse_color(t_parse_cub *cub_data, char **data)
 {
-	int	i;
+	int		i;
+	int		j;
+	char	**rgb;
 
 	i = 0;
-	while (i < N_TEXTURES)
-		ft_strdel(((char **)(&cub_data->texture))[i++]);
-	i = 0;
-	ft_free_matrice((void**)cub_data->map.array, cub_data->map.y);
+	j = 0;
+	while (ft_strcmp(data[0], g_color[i].hash) && i < N_COLORS)
+		i++;
+	rgb = ft_split(data[1], ',');
+	((int *)(&cub_data->color))[i] += ft_atoi(rgb[0]) << 16;
+	((int *)(&cub_data->color))[i] += ft_atoi(rgb[1]) << 8;
+	((int *)(&cub_data->color))[i] += ft_atoi(rgb[2]);
+	ft_free_matrice((void **)data, 2);
+	ft_free_matrice((void **)rgb, 3);
 }
 
 void		ft_parse_resolution(t_parse_cub *cub_data, char **data)
@@ -53,10 +64,10 @@ void		ft_parse_textures(t_parse_cub *cub_data, char **data)
 	while (ft_strcmp(data[0], g_texture[i].hash))
 		i++;
 	((char **)(&cub_data->texture))[i] = data[1];
-	if (!ft_endswith(((char **)(&cub_data->texture))[i], ".xml"))
+	if (!ft_endswith(((char **)(&cub_data->texture))[i], ".xpm"))
 	{
 		ft_free_cub_data(cub_data);
-		ft_exit_error("No xml file.\n");
+		ft_exit_error("No xpm file.\n");
 	}
 	if ((fd = open(((char **)(&cub_data->texture))[i], O_RDONLY)) < 0)
 	{
@@ -93,8 +104,8 @@ t_parse_cub	ft_parse_file(char *filename)
 		ft_exit_error("Can't open file.\n");
 	while (get_next_line(fd, &line))
 	{
-		if (!ft_startswith(line, "1"))
-			ft_parse_map(ft_split(line, ' '), line, fd);
+		if (ft_startswith(line, "1"))
+			ft_parse_map(&cub_data, ft_split(line, ' '), fd);
 		else if (ft_strcmp(line, ""))
 			ft_parse_data(&cub_data, line);
 		ft_strdel(line);

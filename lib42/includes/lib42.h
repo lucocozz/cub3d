@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/07 19:37:23 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/14 19:12:22 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/18 23:12:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include "ft_string.h"
 # include "ft_vfprintf.h"
 # include "ft_system.h"
+# include "ft_list.h"
 # include "ft_matrice.h"
 
 #endif

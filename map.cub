@@ -1,11 +1,11 @@
 R 1920 1080
 
-NO ./textures/north.xmp
-SO ./textures/south.xmp
-WE ./textures/west.xmp
-EA ./textures/east.xmp
+NO ./textures/mossy.xpm
+SO ./textures/redbrick.xpm
+WE ./textures/stone.xpm
+EA ./textures/wood.xpm
 
-S ./textures/sprite.xmp
+S ./textures/pnj.xpm
 
 F 220,100,0
 C 225,30,0

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsjoin.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucocozz <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/14 03:23:03 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/14 03:29:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/14 17:15:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*ft_join(char *strnew, char **strs, char *sep, int size)
 	return (strnew);
 }
 
-char	*ft_strsjoin(int size, char **strs, char *sep)
+char		*ft_strsjoin(int size, char **strs, char *sep)
 {
 	int		i;
 	int		len;

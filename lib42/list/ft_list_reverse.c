@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_startswith.c                                    :+:      :+:    :+:   */
+/*   ft_list_reverse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/11 18:21:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 00:50:47 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/07/18 21:44:16 by lucocozz          #+#    #+#             */
+/*   Updated: 2019/07/25 19:29:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib42.h"
+#include "ft_list.h"
 
-int	ft_startswith(char *str, char *startswith)
+void	ft_list_reverse(t_list **begin_list)
 {
-	int	lstr;
-	int	lstart;
+	t_list *prev;
+	t_list *next;
+	t_list *curr;
 
-	lstr = ft_strlen(str);
-	lstart = ft_strlen(startswith);
-	return (lstr < lstart ? 0 : ft_memcmp(startswith, str, lstart) == 0);
+	prev = 0;
+	curr = *begin_list;
+	if (!curr || !curr->next)
+		return ;
+	while (curr)
+	{
+		next = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = next;
+	}
+	*begin_list = prev;
 }

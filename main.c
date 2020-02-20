@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:18:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/13 21:37:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/20 05:39:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int			main(int ac, char **av)
 	save = ft_check_arg(ac, av);
 	cub_data = ft_init_cub_data();
 	cub_data = ft_parse_file(av[1]);
+	if (!ft_check_cub_data(cub_data))
+	{
+		ft_free_cub_data(&cub_data);
+		ft_exit_error("Missing or bad obligtoire parameter in .cub file.\n");
+	}
 
 	return (0);
 }
