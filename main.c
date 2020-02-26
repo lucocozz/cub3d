@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:18:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 05:39:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/26 18:15:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,23 @@ static int	ft_check_arg(int ac, char **av)
 	return (0);
 }
 
+static void	ft_events_hook(t_garbage garbage)
+{
+	t_screen_cub	*screen;
+
+	screen = garbage.screen;
+	mlx_hook(screen->win, DESTROYNOTIFY, 0, &ft_exit_cub, (void*)&garbage);
+	mlx_hook(screen->win, KEYPRESS, 0, &ft_press_event, (void*)&garbage);
+	mlx_hook(screen->win, KEYRELEASE, 0, &ft_release_event, (void*)&garbage);
+	mlx_loop_hook(screen->mlx, &ft_loop_event, (void*)&garbage);
+	mlx_loop(screen->mlx);
+}
+
 int			main(int ac, char **av)
 {
-	int			save;
-	t_parse_cub	cub_data;
+	int				save;
+	t_screen_cub	screen;
+	t_parse_cub		cub_data;
 
 	save = ft_check_arg(ac, av);
 	cub_data = ft_init_cub_data();
@@ -40,6 +53,7 @@ int			main(int ac, char **av)
 		ft_free_cub_data(&cub_data);
 		ft_exit_error("Missing or bad obligtoire parameter in .cub file.\n");
 	}
-
+	screen = ft_init_screen(cub_data);
+	ft_events_hook((t_garbage){&cub_data, &screen});
 	return (0);
 }

@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 21:38:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 05:35:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/26 17:49:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-t_parse_cub	ft_init_cub_data(void)
+t_parse_cub		ft_init_cub_data(void)
 {
 	int			i;
 	t_parse_cub	cub_data;
@@ -32,7 +32,7 @@ t_parse_cub	ft_init_cub_data(void)
 	return (cub_data);
 }
 
-int			ft_check_cub_data(t_parse_cub cub_data)
+int				ft_check_cub_data(t_parse_cub cub_data)
 {
 	int	i;
 
@@ -51,7 +51,7 @@ int			ft_check_cub_data(t_parse_cub cub_data)
 	return (1);
 }
 
-void		ft_free_cub_data(t_parse_cub *cub_data)
+void			ft_free_cub_data(t_parse_cub *cub_data)
 {
 	int	i;
 
@@ -62,9 +62,19 @@ void		ft_free_cub_data(t_parse_cub *cub_data)
 	ft_free_matrice((void**)cub_data->map.array, cub_data->map.y);
 }
 
-void		ft_exit_parse_map(char *s, t_parse_cub *cub_data, t_list *lst)
+void			ft_exit_parse_map(char *s, t_parse_cub *cub_data, t_list *lst)
 {
 	ft_list_clear(lst, &free);
 	ft_free_cub_data(cub_data);
 	ft_exit_error(s);
+}
+
+t_screen_cub	ft_init_screen(t_parse_cub cub_data)
+{
+	t_screen_cub	s;
+
+	s.mlx = mlx_init();
+	mlx_do_key_autorepeaton(s.mlx);
+	s.win = mlx_new_window(s.mlx, cub_data.size.x, cub_data.size.y, "Cub3D");
+	return (s);
 }

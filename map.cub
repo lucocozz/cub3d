@@ -1,11 +1,11 @@
-R 1920 1080
+R 1280 720
 
 NO ./textures/mossy.xpm
 SO ./textures/redbrick.xpm
 WE ./textures/stone.xpm
 EA ./textures/wood.xpm
 
-S ./textures/pnj.xpm
+S ./sprites/pnj.xpm
 
 F 220,100,0
 C 225,30,0
@@ -17,8 +17,8 @@ C 225,30,0
 1 0 0 1 1 1 1 1 0 0 1
 1 0 0 0 0 0 0 0 0 0 1
 1 0 0 0 0 0 0 0 0 0 1
-1 0 0 0 0 0 0 0 0 0 1
+1 0 0 0 0 N 0 0 0 0 1
 1 0 0 0 0 0 0 0 0 0 1
 1 1 1 1 1 0 1 1 1 1 1
-1 W 0 0 0 0 0 0 0 0 1
+1 0 0 0 0 0 0 0 0 0 1
 1 1 1 1 1 1 1 1 1 1 1

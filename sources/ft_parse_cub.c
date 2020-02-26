@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 03:04:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/02/21 02:06:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_data_cub		g_data_cub[N_DATA] = {
+static t_data_cub	g_data_cub[N_DATA] = {
 	{"R", &ft_parse_resolution}, {"NO", &ft_parse_textures},
 	{"SO", &ft_parse_textures}, {"WE", &ft_parse_textures},
 	{"EA", &ft_parse_textures}, {"S", &ft_parse_textures},
@@ -52,6 +52,10 @@ void		ft_parse_resolution(t_parse_cub *cub_data, char **data)
 	i = 0;
 	cub_data->size.x = ft_atoi(data[1]);
 	cub_data->size.y = ft_atoi(data[2]);
+	if (cub_data->size.x > DISPLAY_X)
+		cub_data->size.x = DISPLAY_X;
+	if (cub_data->size.y > DISPLAY_Y)
+		cub_data->size.y = DISPLAY_Y;
 	ft_free_matrice((void**)data, 3);
 }
 

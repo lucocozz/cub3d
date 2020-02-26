@@ -1,23 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_matrice.h                                       :+:      :+:    :+:   */
+/*   ft_key.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/14 17:12:54 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/26 18:17:10 by lucocozz         ###   ########.fr       */
+/*   Created: 2020/02/26 17:20:41 by lucocozz          #+#    #+#             */
+/*   Updated: 2020/02/26 17:28:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MATRICE_H
-# define FT_MATRICE_H
+#include "cub3d.h"
 
-# include "lib42.h"
+int	ft_w_key(void *param)
+{
+	(void)param;
+	ft_printf("W\n");
+	return (1);
+}
 
-void			ft_free_matrice(void **matrice, int size);
-int				ft_matrice_len(char **matrice);
-void			**ft_matrice_join(void **matrice, void *line, int size);
-void			ft_print_matrice(char **matrice);
+int	ft_a_key(void *param)
+{
+	(void)param;
+	ft_printf("A\n");
+	return (1);
+}
 
-#endif
+int	ft_s_key(void *param)
+{
+	(void)param;
+	ft_printf("S\n");
+	return (1);
+}
+
+int	ft_d_key(void *param)
+{
+	(void)param;
+	ft_printf("D\n");
+	return (1);
+}

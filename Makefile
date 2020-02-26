@@ -1,6 +1,7 @@
 NAME=	Cub3d
 
-FILE=	ft_parse_cub.c		ft_parse_cub2.c			ft_cub_utils.c
+FILE=	ft_parse_cub.c		ft_parse_cub2.c			ft_cub_utils.c		\
+		ft_events.c			ft_keys.c
 
 MAIN=	main.c
 
