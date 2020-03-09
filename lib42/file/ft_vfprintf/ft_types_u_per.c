@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 20:35:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/07 21:32:22 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/03 16:33:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str, int nb)
+static void	ft_rigth_padding(t_printf data, t_buffer *buffer, char *str, int nb)
 {
 	int	len;
 
@@ -30,7 +30,7 @@ static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 		ft_insert_format(buffer, &data, ' ');
 }
 
-static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
+static void	ft_left_padding(t_printf data, t_buffer *buffer, char *str, int nb)
 {
 	int len;
 
@@ -48,7 +48,7 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str, int nb)
 		ft_insert_str(buffer, &data, str);
 }
 
-void		ft_u(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_u(va_list ap, t_printf data, t_buffer *buffer)
 {
 	unsigned int	nb;
 	char			*str;
@@ -62,7 +62,7 @@ void		ft_u(va_list ap, t_parse data, t_buffer *buffer)
 	ft_strdel(str);
 }
 
-void		ft_per(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_per(va_list ap, t_printf data, t_buffer *buffer)
 {
 	(void)ap;
 	(void)data;

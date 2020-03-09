@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:18:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/26 18:15:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/08 03:23:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,33 +27,26 @@ static int	ft_check_arg(int ac, char **av)
 	return (0);
 }
 
-static void	ft_events_hook(t_garbage garbage)
-{
-	t_screen_cub	*screen;
-
-	screen = garbage.screen;
-	mlx_hook(screen->win, DESTROYNOTIFY, 0, &ft_exit_cub, (void*)&garbage);
-	mlx_hook(screen->win, KEYPRESS, 0, &ft_press_event, (void*)&garbage);
-	mlx_hook(screen->win, KEYRELEASE, 0, &ft_release_event, (void*)&garbage);
-	mlx_loop_hook(screen->mlx, &ft_loop_event, (void*)&garbage);
-	mlx_loop(screen->mlx);
-}
-
 int			main(int ac, char **av)
 {
 	int				save;
-	t_screen_cub	screen;
-	t_parse_cub		cub_data;
-
+	t_mlx			mlx;
+	t_engine		engine;
+	t_parsing		parse;
+	
 	save = ft_check_arg(ac, av);
-	cub_data = ft_init_cub_data();
-	cub_data = ft_parse_file(av[1]);
-	if (!ft_check_cub_data(cub_data))
+	parse = ft_init_parsing();
+	parse = ft_parse_file(av[1]);
+	if (!ft_check_parsing(parse))
 	{
-		ft_free_cub_data(&cub_data);
+		ft_free_parsing(&parse);
 		ft_exit_error("Missing or bad obligtoire parameter in .cub file.\n");
 	}
-	screen = ft_init_screen(cub_data);
-	ft_events_hook((t_garbage){&cub_data, &screen});
+	engine = ft_init_engine(&parse);
+	mlx = ft_init_mlx(parse);
+	ft_get_textures_img(&engine, &mlx, parse);
+	ft_raycast(&parse, &engine, &mlx);
+	ft_bmp((t_garbage){&parse, &mlx, &engine}, save);
+	ft_events_hook((t_garbage){&parse, &mlx, &engine});
 	return (0);
 }

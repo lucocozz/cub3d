@@ -6,15 +6,15 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:41:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/10 23:59:11 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/03 16:34:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-t_parse	ft_init_parse(void)
+t_printf	ft_init_parse(void)
 {
-	t_parse	data;
+	t_printf	data;
 
 	data.padding = 0;
 	data.width = 0;
@@ -39,13 +39,13 @@ void	ft_insert_in_buffer(t_buffer *buffer, char c)
 		ft_print_buffer(buffer);
 }
 
-void	ft_insert_format(t_buffer *buffer, t_parse *data, char c)
+void	ft_insert_format(t_buffer *buffer, t_printf *data, char c)
 {
 	ft_insert_in_buffer(buffer, c);
 	data->width--;
 }
 
-void	ft_insert_str(t_buffer *buffer, t_parse *data, char *str)
+void	ft_insert_str(t_buffer *buffer, t_printf *data, char *str)
 {
 	int	i;
 

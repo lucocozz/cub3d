@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_cub.c                                     :+:      :+:    :+:   */
+/*   ft_parsing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/21 02:06:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/06 19:20:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_hash_table	g_color[N_COLORS] = {
 	{"F"}, {"C"}
 };
 
-void		ft_parse_color(t_parse_cub *cub_data, char **data)
+void		ft_parse_color(t_parsing *parse, char **data)
 {
 	int		i;
 	int		j;
@@ -38,28 +38,28 @@ void		ft_parse_color(t_parse_cub *cub_data, char **data)
 	while (ft_strcmp(data[0], g_color[i].hash) && i < N_COLORS)
 		i++;
 	rgb = ft_split(data[1], ',');
-	((int *)(&cub_data->color))[i] += ft_atoi(rgb[0]) << 16;
-	((int *)(&cub_data->color))[i] += ft_atoi(rgb[1]) << 8;
-	((int *)(&cub_data->color))[i] += ft_atoi(rgb[2]);
+	((int *)(&parse->color))[i] += ft_atoi(rgb[0]) << 16;
+	((int *)(&parse->color))[i] += ft_atoi(rgb[1]) << 8;
+	((int *)(&parse->color))[i] += ft_atoi(rgb[2]);
 	ft_free_matrice((void **)data, 2);
 	ft_free_matrice((void **)rgb, 3);
 }
 
-void		ft_parse_resolution(t_parse_cub *cub_data, char **data)
+void		ft_parse_resolution(t_parsing *parse, char **data)
 {
 	int i;
 
 	i = 0;
-	cub_data->size.x = ft_atoi(data[1]);
-	cub_data->size.y = ft_atoi(data[2]);
-	if (cub_data->size.x > DISPLAY_X)
-		cub_data->size.x = DISPLAY_X;
-	if (cub_data->size.y > DISPLAY_Y)
-		cub_data->size.y = DISPLAY_Y;
+	parse->size.x = ft_atoi(data[1]);
+	parse->size.y = ft_atoi(data[2]);
+	if (parse->size.x > DISPLAY_X)
+		parse->size.x = DISPLAY_X;
+	if (parse->size.y > DISPLAY_Y)
+		parse->size.y = DISPLAY_Y;
 	ft_free_matrice((void**)data, 3);
 }
 
-void		ft_parse_textures(t_parse_cub *cub_data, char **data)
+void		ft_parse_textures(t_parsing *parse, char **data)
 {
 	int	i;
 	int	fd;
@@ -67,15 +67,15 @@ void		ft_parse_textures(t_parse_cub *cub_data, char **data)
 	i = 0;
 	while (ft_strcmp(data[0], g_texture[i].hash))
 		i++;
-	((char **)(&cub_data->texture))[i] = data[1];
-	if (!ft_endswith(((char **)(&cub_data->texture))[i], ".xpm"))
+	((char **)(&parse->texture))[i] = data[1];
+	if (!ft_endswith(((char **)(&parse->texture))[i], ".xpm"))
 	{
-		ft_free_cub_data(cub_data);
+		ft_free_parsing(parse);
 		ft_exit_error("No xpm file.\n");
 	}
-	if ((fd = open(((char **)(&cub_data->texture))[i], O_RDONLY)) < 0)
+	if ((fd = open(((char **)(&parse->texture))[i], O_RDONLY)) < 0)
 	{
-		ft_free_cub_data(cub_data);
+		ft_free_parsing(parse);
 		ft_exit_error("Can't open texture.\n");
 	}
 	else
@@ -84,7 +84,7 @@ void		ft_parse_textures(t_parse_cub *cub_data, char **data)
 	free(data);
 }
 
-void		ft_parse_data(t_parse_cub *cub_data, char *line)
+void		ft_parse_data(t_parsing *parse, char *line)
 {
 	int		i;
 	char	**data;
@@ -95,26 +95,26 @@ void		ft_parse_data(t_parse_cub *cub_data, char *line)
 		i++;
 	if (i == N_DATA)
 		return ;
-	g_data_cub[i].function(cub_data, data);
+	g_data_cub[i].function(parse, data);
 }
 
-t_parse_cub	ft_parse_file(char *filename)
+t_parsing	ft_parse_file(char *filename)
 {
 	int			fd;
 	char		*line;
-	t_parse_cub cub_data;
+	t_parsing	parse;
 
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		ft_exit_error("Can't open file.\n");
 	while (get_next_line(fd, &line))
 	{
 		if (ft_startswith(line, "1"))
-			ft_parse_map(&cub_data, ft_split(line, ' '), fd);
+			ft_parse_map(&parse, ft_split(line, ' '), fd);
 		else if (ft_strcmp(line, ""))
-			ft_parse_data(&cub_data, line);
+			ft_parse_data(&parse, line);
 		ft_strdel(line);
 	}
 	ft_strdel(line);
 	close(fd);
-	return (cub_data);
+	return (parse);
 }

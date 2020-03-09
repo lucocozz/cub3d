@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/21 02:54:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/07 21:32:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/03 16:33:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-void		ft_c(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_c(va_list ap, t_printf data, t_buffer *buffer)
 {
 	char	c;
 
@@ -31,7 +31,7 @@ void		ft_c(va_list ap, t_parse data, t_buffer *buffer)
 	}
 }
 
-static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str)
+static void	ft_rigth_padding(t_printf data, t_buffer *buffer, char *str)
 {
 	int	i;
 
@@ -46,7 +46,7 @@ static void	ft_rigth_padding(t_parse data, t_buffer *buffer, char *str)
 		ft_insert_format(buffer, &data, ' ');
 }
 
-static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str)
+static void	ft_left_padding(t_printf data, t_buffer *buffer, char *str)
 {
 	int	i;
 	int	len;
@@ -64,7 +64,7 @@ static void	ft_left_padding(t_parse data, t_buffer *buffer, char *str)
 		ft_insert_in_buffer(buffer, str[i++]);
 }
 
-void		ft_s(va_list ap, t_parse data, t_buffer *buffer)
+void		ft_s(va_list ap, t_printf data, t_buffer *buffer)
 {
 	char	*str;
 

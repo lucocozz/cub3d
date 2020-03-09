@@ -1,7 +1,9 @@
 NAME=	Cub3d
 
-FILE=	ft_parse_cub.c		ft_parse_cub2.c			ft_cub_utils.c		\
-		ft_events.c			ft_keys.c
+FILE=	ft_parsing.c		ft_parsing2.c			ft_cub_utils.c		\
+		ft_events.c			ft_keys.c				ft_init_engine.c	\
+		ft_raycasting.c		ft_engine.c				ft_bmp.c			\
+		ft_keys2.c			ft_textures.c
 
 MAIN=	main.c
 
@@ -11,7 +13,9 @@ OBJS_S=	$(SRCS:%.c=%.o)
 
 CC=gcc
 
-CFLAGS= -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib -lmlx -framework opengl -framework AppKit -I includes/ -I lib42/includes/ -L lib42/ -l42 -g3 -fsanitize=address
+CFLAGS= -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib		\
+-lmlx -framework opengl -framework AppKit -I includes/ -I lib42/includes/	\
+-L lib42/ -l42 -g3 -fsanitize=address
 
 all: $(NAME)
 

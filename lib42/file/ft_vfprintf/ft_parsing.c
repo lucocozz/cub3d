@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:36:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/07 21:32:44 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/03 16:33:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-int		ft_parse_padding(char c, t_parse *data)
+int		ft_parse_padding(char c, t_printf *data)
 {
 	int	pad;
 
@@ -23,7 +23,7 @@ int		ft_parse_padding(char c, t_parse *data)
 	return (pad);
 }
 
-int		ft_parse_fill(char c, t_parse *data)
+int		ft_parse_fill(char c, t_printf *data)
 {
 	int	fill;
 
@@ -35,7 +35,7 @@ int		ft_parse_fill(char c, t_parse *data)
 	return (fill);
 }
 
-int		ft_parse_width(const char *s, t_parse *data, va_list ap)
+int		ft_parse_width(const char *s, t_printf *data, va_list ap)
 {
 	int	i;
 	int	nb;
@@ -61,7 +61,7 @@ int		ft_parse_width(const char *s, t_parse *data, va_list ap)
 	return (i);
 }
 
-int		ft_parse_precision(const char *s, t_parse *data, va_list ap)
+int		ft_parse_precision(const char *s, t_printf *data, va_list ap)
 {
 	int	i;
 

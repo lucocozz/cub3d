@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 19:28:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/20 05:40:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/02 20:31:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,31 +57,31 @@ static int	ft_middle_map(char *row)
 	return (i);
 }
 
-static void	ft_check_map(t_parse_cub *cub_data, t_list **alst)
+static void	ft_check_map(t_parsing *parse, t_list **alst)
 {
 	int		len;
 	t_list	*lst;
 
 	lst = *alst;
-	cub_data->map.x = ft_top_bottom_map((char*)lst->data);
-	if (!cub_data->map.x)
-		ft_exit_parse_map("Map doesn't open proprly.\n", cub_data, *alst);
+	parse->map.x = ft_top_bottom_map((char*)lst->data);
+	if (!parse->map.x)
+		ft_exit_parse_map("Map doesn't open proprly.\n", parse, *alst);
 	lst = lst->next;
-	cub_data->map.y++;
+	parse->map.y++;
 	while (lst->next)
 	{
 		len = ft_middle_map((char*)lst->data);
-		if (len != cub_data->map.x)
-			ft_exit_parse_map("Map have bad charactere.\n", cub_data, *alst);
-		cub_data->map.y++;
+		if (len != parse->map.x)
+			ft_exit_parse_map("Map have bad charactere.\n", parse, *alst);
+		parse->map.y++;
 		lst = lst->next;
 	}
 	if (ft_top_bottom_map((char*)lst->data) == 0)
-		ft_exit_parse_map("Map doesn't close proprely.\n", cub_data, *alst);
-	cub_data->map.y++;
+		ft_exit_parse_map("Map doesn't close proprely.\n", parse, *alst);
+	parse->map.y++;
 }
 
-void		ft_parse_map(t_parse_cub *cub_data, char **data, int fd)
+void		ft_parse_map(t_parsing *parse, char **data, int fd)
 {
 	int			i;
 	char		*line;
@@ -89,14 +89,14 @@ void		ft_parse_map(t_parse_cub *cub_data, char **data, int fd)
 
 	i = 0;
 	lst_map = NULL;
-	(void)cub_data;
+	(void)parse;
 	ft_list_push_back(&lst_map, (void*)ft_get_row(data));
 	while (get_next_line(fd, &line))
 	{
 		ft_list_push_back(&lst_map, (void*)ft_get_row(ft_split(line, ' ')));
 		ft_strdel(line);
 	}
-	ft_check_map(cub_data, &lst_map);
-	cub_data->map.array = ft_list_to_array(&lst_map);
+	ft_check_map(parse, &lst_map);
+	parse->map.array = ft_list_to_array(&lst_map);
 	ft_strdel(line);
 }

@@ -38,7 +38,7 @@ LST=	ft_create_elem.c	ft_list_at.c		ft_list_push_front.c	\
 		ft_list_print.c		ft_list_to_array.c
 
 MTX=	ft_free_matrice.c	ft_matrice_join.c	ft_matrice_len.c		\
-		ft_print_matrice.c
+		ft_print_matrice.c	ft_malloc_matrice.c
 
 SYS=	ft_exit_error.c
 

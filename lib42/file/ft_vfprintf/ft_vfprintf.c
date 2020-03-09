@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/07 21:32:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/03 16:34:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_types		g_types[N_TYPES] = {
 	{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
 };
 
-static void		ft_format_buffer(t_parse data, t_buffer *buffer, va_list ap)
+static void		ft_format_buffer(t_printf data, t_buffer *buffer, va_list ap)
 {
 	int	i;
 
@@ -28,9 +28,9 @@ static void		ft_format_buffer(t_parse data, t_buffer *buffer, va_list ap)
 	g_types[i].function(ap, data, buffer);
 }
 
-static t_parse	ft_parsing(const char *format, int *i, va_list ap)
+static t_printf	ft_parsing(const char *format, int *i, va_list ap)
 {
-	t_parse	data;
+	t_printf	data;
 
 	data = ft_init_parse();
 	*i += 1;
