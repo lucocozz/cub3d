@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 21:38:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/03 16:56:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/09 05:09:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ t_parsing		ft_init_parsing(void)
 	i = 0;
 	while (i < N_TEXTURES)
 		((char **)(&parse.texture))[i++] = NULL;
+	i = 0;
+	while (i < N_SPRITES)
+		((char **)(&parse.sprite))[i++] = NULL;
 	i = 0;
 	while (i < N_COLORS)
 		((int *)(&parse.color))[i++] = 0;
@@ -41,6 +44,10 @@ int				ft_check_parsing(t_parsing parse)
 		if (((char **)(&parse.texture))[i++] == NULL)
 			return (0);
 	i = 0;
+	while (i < N_SPRITES)
+		if (((char **)(&parse.sprite))[i++] == NULL)
+			return (0);
+	i = 0;
 	while (i < 2)
 		if (((int *)(&parse.size))[i++] == 0)
 			return (0);
@@ -58,6 +65,9 @@ void			ft_free_parsing(t_parsing *parse)
 	i = 0;
 	while (i < N_TEXTURES)
 		ft_strdel(((char **)(&parse->texture))[i++]);
+	i = 0;
+	while (i < N_SPRITES)
+		ft_strdel(((char **)(&parse->sprite))[i++]);
 	i = 0;
 	ft_free_matrice((void**)parse->map.array, parse->map.y);
 }

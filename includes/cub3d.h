@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/08 07:19:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/09 08:21:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define DISPLAY_Y 1440
 
 # define MAP_DATA "012NEWS"
+# define SPRITES "2"
 
 # define NORTH 3
 # define SOUTH 2
@@ -31,7 +32,8 @@
 # define WEST 1
 
 # define N_DATA 8
-# define N_TEXTURES 5
+# define N_TEXTURES 4
+# define N_SPRITES 1
 # define N_COLORS 2
 # define N_KEYS	7
 
@@ -70,7 +72,6 @@ typedef struct		s_texture_path
 	char			*south;
 	char			*west;
 	char			*east;
-	char			*sprite;
 }					t_texture_path;
 
 typedef struct		s_texture_data
@@ -92,8 +93,27 @@ typedef struct		s_texture_img
 	t_texture_data	south;
 	t_texture_data	west;
 	t_texture_data	east;
-	t_texture_data	sprite;
 }					t_texture_img;
+
+typedef struct		s_sprite_path
+{
+	char			*sprite;
+}					t_sprite_path;
+
+typedef struct		s_sprite_data
+{
+	void			*ptr;
+	int				*img;
+	t_fcoord		coord;
+}					t_sprite_data;
+
+typedef struct		s_sprite
+{
+	int				nb;
+	int				*dist;
+	int				*order;
+	t_sprite_data	*data;
+}					t_sprite;
 
 typedef	struct		s_color_cub
 {
@@ -113,6 +133,7 @@ typedef struct		s_parsing
 	t_coord			size;
 	t_map_parse		map;
 	t_color_cub		color;
+	t_sprite_path	sprite;
 	t_texture_path	texture;
 }					t_parsing;
 
@@ -165,6 +186,7 @@ typedef struct		s_raycast
 	int				color;
 	int				line_h;
 	float			PWDist;
+	float			*cast;
 	t_coord			map;
 	t_coord			step;
 	t_fcoord		cam;
@@ -186,6 +208,7 @@ typedef struct		s_engine
 	float			moveS;
 	t_camera		cam;
 	t_map_eng		map;
+	t_sprite		sprite;
 	t_texture_img	texture;
 }					t_engine;
 
@@ -216,6 +239,7 @@ void				ft_exit_parse_map(char *s, t_parsing *c_d, t_list *lst);
 
 void				ft_parse_map(t_parsing *parse, char **data, int fd);
 void				ft_parse_color(t_parsing *parse, char **data);
+void				ft_parse_sprites(t_parsing *parse, char **data);
 void				ft_parse_textures(t_parsing *parse, char **data);
 void				ft_parse_resolution(t_parsing *parse, char **data);
 

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:55:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/06 23:55:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/09 08:06:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,9 @@ t_engine	ft_init_engine(t_parsing *parse)
 		}
 		y++;
 	}
+	engine.sprite.data = NULL;
+	engine.sprite.order = NULL;
+	engine.sprite.dist = NULL;
 	engine.moveS = 0.25;
 	engine.rotS = 0.05;
 	return (engine);

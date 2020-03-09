@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:23:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/08 00:49:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/09 06:20:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ static t_raycast	ft_init_ray(t_engine *eng, t_parsing *parse, int col)
 	ray.cam.y = 0;
 	ray.sDist.x = 0;
 	ray.sDist.y = 0;
+	ray.cast = malloc(sizeof(int) * parse->size.x);
 	ray.cam.x = 2 * ray.col / (float)parse->size.x - 1;
 	ray.dir.x = eng->cam.dir.x + eng->cam.plane.x * ray.cam.x;
 	ray.dir.y = eng->cam.dir.y + eng->cam.plane.y * ray.cam.x;
@@ -106,6 +107,7 @@ void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
 		ft_ray_hit(eng, &ray);
 		ft_p_h_ray(*parse, &ray, eng);
 		ft_draw(eng, mlx, *parse, &ray);
+		ray.cast[ray.col] = ray.PWDist;
 		ray.col++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/06 19:20:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/09 04:46:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 static t_data_cub	g_data_cub[N_DATA] = {
 	{"R", &ft_parse_resolution}, {"NO", &ft_parse_textures},
 	{"SO", &ft_parse_textures}, {"WE", &ft_parse_textures},
-	{"EA", &ft_parse_textures}, {"S", &ft_parse_textures},
+	{"EA", &ft_parse_textures}, {"S", &ft_parse_sprites},
 	{"F", &ft_parse_color}, {"C", &ft_parse_color}
 };
 
 static t_hash_table	g_texture[N_TEXTURES] = {
-	{"NO"}, {"SO"}, {"WE"}, {"EA"}, {"S"}
+	{"NO"}, {"SO"}, {"WE"}, {"EA"}
 };
 
 static t_hash_table	g_color[N_COLORS] = {
