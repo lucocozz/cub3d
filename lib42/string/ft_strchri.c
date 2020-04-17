@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   ft_strchri.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/10 04:10:01 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 12:02:58 by lucocozz          #+#    #+#             */
+/*   Updated: 2020/04/16 18:16:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-char	*ft_strjoin_free(char *s1, char const *s2)
+int	ft_strchri(const char *s, int c)
 {
-	char	*strnew;
+	unsigned int i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	if (s1[0] == '\0' && s2[0] == '\0')
-		return (ft_strdup(""));
-	strnew = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (strnew == NULL)
-		return (NULL);
-	ft_strcpy(strnew, (char*)s1);
-	ft_strcat(strnew, (char*)s2);
-	return (strnew);
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return (i);
+		i++;
+	}
+	if (c == '\0')
+		return (i);
+	return (-1);
 }

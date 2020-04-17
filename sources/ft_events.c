@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 01:05:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/08 10:32:45 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/15 20:18:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,39 @@ static t_key_event	g_event[N_KEYS] = {
 	{LEFT_KEY, &ft_left_key}
 };
 
-void	ft_events_hook(t_garbage garbage)
+// static t_key_bit	g_bit[N_KEYS] = {
+// 	{ESC_KEY, 0}, {W_KEY, 1}, {A_KEY, 2}, {S_KEY, 3}, {D_KEY, 4},
+// 	{RIGHT_KEY, 5}, {LEFT_KEY, 6}	
+// };
+
+static void	ft_keys(t_garbage *garb)
+{
+	int	i;
+
+	i = 0;
+	if (garb->engine->key)
+		while (i < N_KEYS)
+		{
+			if ((garb->engine->key >> i) & 1)
+				g_event[i].event(garb);
+			i++;
+		}
+}
+
+void		ft_events_hook(t_garbage garbage)
 {
 	t_mlx	*mlx;
 
 	mlx = garbage.mlx;
 	mlx_do_key_autorepeaton(mlx->ptr);
 	mlx_hook(mlx->win, DESTROYNOTIFY, 0, &ft_exit_cub, (void*)&garbage);
-	mlx_hook(mlx->win, KEYPRESS, 0, &ft_press_event, (void*)&garbage);
-	mlx_hook(mlx->win, KEYRELEASE, 0, &ft_release_event, (void*)&garbage);
+	mlx_hook(mlx->win, KEYPRESS, 1, &ft_press_event, (void*)&garbage);
+	mlx_hook(mlx->win, KEYRELEASE, 2, &ft_release_event, (void*)&garbage);
 	mlx_loop_hook(mlx->ptr, &ft_loop_event, (void*)&garbage);
 	mlx_loop(mlx->ptr);
 }
 
-int		ft_exit_cub(t_garbage *garb)
-{
-	int				i;
-	t_texture_data	*tmp;
-
-	i = 0;
-	ft_free_parsing(garb->parse);
-	mlx_destroy_image(garb->mlx->ptr, garb->mlx->img.ptr);
-	if (garb->mlx->win)
-		mlx_destroy_window(garb->mlx->ptr, garb->mlx->win);
-	ft_free_matrice((void**)garb->engine->map.array, garb->parse->map.y);
-	while (i < N_TEXTURES)
-	{
-		tmp = &((t_texture_data *)(&garb->engine->texture))[i];
-		mlx_destroy_image(garb->mlx->ptr, tmp->ptr);
-		i++;
-	}
-	exit(EXIT_SUCCESS);
-	return (0);
-}
-
-int		ft_press_event(int key, t_garbage *garb)
+int			ft_press_event(int key, t_garbage *garb)
 {
 	int	i;
 
@@ -61,11 +59,12 @@ int		ft_press_event(int key, t_garbage *garb)
 		i++;
 	if (i == N_KEYS)
 		return (0);
-	g_event[i].event(garb);
+	garb->engine->key |= 1 << i;
+	ft_keys(garb);
 	return (1);
 }
 
-int		ft_release_event(int key, t_garbage *garb)
+int			ft_release_event(int key, t_garbage *garb)
 {
 	int	i;
 
@@ -75,10 +74,11 @@ int		ft_release_event(int key, t_garbage *garb)
 		i++;
 	if (i == N_KEYS)
 		return (0);
+	garb->engine->key &= ~(1 << i);
 	return (1);
 }
 
-int		ft_loop_event(int key, t_garbage *garb)
+int			ft_loop_event(int key, t_garbage *garb)
 {
 	(void)key;
 	(void)garb;

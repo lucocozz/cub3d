@@ -3,7 +3,8 @@ NAME=	Cub3d
 FILE=	ft_parsing.c		ft_parsing2.c			ft_cub_utils.c		\
 		ft_events.c			ft_keys.c				ft_init_engine.c	\
 		ft_raycasting.c		ft_engine.c				ft_bmp.c			\
-		ft_keys2.c			ft_textures.c			ft_parsing3.c
+		ft_keys2.c			ft_textures.c			ft_parsing3.c		\
+		ft_exit_cub.c		#ft_init_sprite.c		ft_sprite.c
 
 MAIN=	main.c
 
@@ -11,23 +12,23 @@ SRCS=	$(addprefix sources/, $(FILE))
 
 OBJS_S=	$(SRCS:%.c=%.o)
 
-CC=gcc
+CC=clang
 
-CFLAGS= -Wall -Wextra -Werror -I /usr/local/include -L /usr/local/lib		\
--lmlx -framework opengl -framework AppKit -I includes/ -I lib42/includes/	\
--L lib42/ -l42 -g3 -fsanitize=address
+CFLAGS= -Wall -Wextra -Werror -I includes/ -I lib42/includes/			\
+-I /usr/local/include -L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11	\
+-lm -lbsd -g3 -fsanitize=address
 
 all: $(NAME)
 
 lib:
-	cd lib42 && $(MAKE) && cd ../
+	$(MAKE) -C lib42
 
 $(NAME): lib
-	$(CC) $(CFLAGS) $(MAIN) $(SRCS) -o $(NAME)
+	$(CC) $(MAIN) $(SRCS) -o $(NAME) $(CFLAGS)
 
 clean:
 	rm -f $(OBJS_S)
-	cd lib42 && $(MAKE) clean && cd ../
+	$(MAKE) clean -C lib42
 
 fclean: clean
 	rm -f $(NAME)

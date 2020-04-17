@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_cub2.c                                    :+:      :+:    :+:   */
+/*   ft_parsing2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 19:28:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/02 20:31:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/14 21:01:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	ft_check_map(t_parsing *parse, t_list **alst)
 	t_list	*lst;
 
 	lst = *alst;
+	parse->map.y = 0;
 	parse->map.x = ft_top_bottom_map((char*)lst->data);
 	if (!parse->map.x)
 		ft_exit_parse_map("Map doesn't open proprly.\n", parse, *alst);
@@ -83,11 +84,9 @@ static void	ft_check_map(t_parsing *parse, t_list **alst)
 
 void		ft_parse_map(t_parsing *parse, char **data, int fd)
 {
-	int			i;
 	char		*line;
 	t_list		*lst_map;
 
-	i = 0;
 	lst_map = NULL;
 	(void)parse;
 	ft_list_push_back(&lst_map, (void*)ft_get_row(data));

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 19:57:06 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/14 17:36:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/17 19:53:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ size_t				ft_strlen(const char *s);
 size_t				ft_strclen(const char *s, char c);
 char				*ft_strdup(const char *s);
 char				*ft_strchr(const char *s, int c);
+int					ft_strchri(const char *s, int c);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strrev(char *str);
 void				ft_strdel(char *s);
@@ -38,6 +39,7 @@ char				*ft_strtrim(char const *s1, char const *set);
 char				**ft_split(char const *s, char c);
 char				*ft_srealloc(char *str, size_t size);
 char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substrf(char *s, unsigned int start, size_t len);
 char				*ft_substr_free(char *s, unsigned int start, size_t len);
 int					ft_count_word(const char *str);
 int					ft_isalpha(int c);

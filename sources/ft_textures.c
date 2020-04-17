@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 05:22:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/08 08:25:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/16 03:03:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ void		ft_texturing(t_garbage garb, t_texture_data *texture,
 t_raycast *ray)
 {
 	t_engine	*eng;
-	t_parsing	*parse;
 
 	eng = garb.engine;
-	parse = garb.parse;
 	texture->num = eng->map.array[ray->map.y][ray->map.x] - 1;
 	if (ray->side == EAST || ray->side == WEST)
 		texture->wall_x = eng->cam.pos.y + ray->PWDist * ray->dir.y;

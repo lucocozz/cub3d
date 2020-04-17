@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/10 04:10:01 by lucocozz         ###   ########.fr       */
+/*   Created: 2020/04/17 19:11:28 by lucocozz          #+#    #+#             */
+/*   Updated: 2020/04/18 01:08:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
+#include <fcntl.h>
+#include <stdio.h>
 
-char	*ft_strjoin_free(char *s1, char const *s2)
+int	main()
 {
-	char	*strnew;
+	int		fd;
+	char	*line;
 
-	if (!s1 || !s2)
-		return (NULL);
-	if (s1[0] == '\0' && s2[0] == '\0')
-		return (ft_strdup(""));
-	strnew = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (strnew == NULL)
-		return (NULL);
-	ft_strcpy(strnew, (char*)s1);
-	ft_strcat(strnew, (char*)s2);
-	return (strnew);
+	line = NULL;
+	fd = open("map.cub", O_RDONLY);
+	while (get_next_line(fd, &line))
+	{
+		ft_printf("%s\n", line);
+		ft_strdel(line);
+	}
+	ft_strdel(line);
+	return (0);
 }

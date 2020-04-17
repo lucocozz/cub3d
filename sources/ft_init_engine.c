@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:55:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/09 08:06:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/17 18:39:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,22 @@ static void	ft_set_cam(t_parsing *parse, t_engine *engine, int x, int y)
 	engine->map.array[y][x] = 0;
 }
 
+static void	ft_data(t_parsing *parse, t_engine *engine)
+{
+	engine->sprite.data = NULL;
+	engine->sprite.order = NULL;
+	engine->sprite.dist = NULL;
+	engine->moveS = 0.15;
+	engine->rotS = 0.05;
+	engine->key = 0;
+	if ((engine->Zbuff = malloc(sizeof(float) * parse->size.x)) == NULL)
+	{
+		ft_free_parsing(parse);
+		ft_free_matrice((void**)engine->map.array, parse->size.y);
+		ft_exit_error("Init engine error\n");
+	}
+}
+
 t_engine	ft_init_engine(t_parsing *parse)
 {
 	int			x;
@@ -77,6 +93,7 @@ t_engine	ft_init_engine(t_parsing *parse)
 	t_engine	engine;
 
 	y = 0;
+	ft_data(parse, &engine);
 	engine.map.array = ft_malloc_map(parse);
 	while (y < parse->map.y)
 	{
@@ -91,10 +108,5 @@ t_engine	ft_init_engine(t_parsing *parse)
 		}
 		y++;
 	}
-	engine.sprite.data = NULL;
-	engine.sprite.order = NULL;
-	engine.sprite.dist = NULL;
-	engine.moveS = 0.25;
-	engine.rotS = 0.05;
 	return (engine);
 }

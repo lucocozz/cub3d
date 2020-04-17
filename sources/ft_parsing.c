@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/09 04:46:26 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/10 04:36:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,9 @@ static t_hash_table	g_color[N_COLORS] = {
 void		ft_parse_color(t_parsing *parse, char **data)
 {
 	int		i;
-	int		j;
 	char	**rgb;
 
 	i = 0;
-	j = 0;
 	while (ft_strcmp(data[0], g_color[i].hash) && i < N_COLORS)
 		i++;
 	rgb = ft_split(data[1], ',');
@@ -47,9 +45,6 @@ void		ft_parse_color(t_parsing *parse, char **data)
 
 void		ft_parse_resolution(t_parsing *parse, char **data)
 {
-	int i;
-
-	i = 0;
 	parse->size.x = ft_atoi(data[1]);
 	parse->size.y = ft_atoi(data[2]);
 	if (parse->size.x > DISPLAY_X)

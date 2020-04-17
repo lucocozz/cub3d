@@ -1,29 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_free.c                                  :+:      :+:    :+:   */
+/*   ft_substrf.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/10 04:10:01 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/10 18:33:44 by lucocozz          #+#    #+#             */
+/*   Updated: 2020/04/17 19:53:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib42.h"
 
-char	*ft_strjoin_free(char *s1, char const *s2)
+char	*ft_substrf(char *s, unsigned int start, size_t len)
 {
-	char	*strnew;
+	char			*substr;
+	unsigned int	i;
 
-	if (!s1 || !s2)
+	i = 0;
+	if (!s)
 		return (NULL);
-	if (s1[0] == '\0' && s2[0] == '\0')
-		return (ft_strdup(""));
-	strnew = (char *)ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
-	if (strnew == NULL)
+	if ((substr = ft_calloc(len + 1, sizeof(char))) == NULL)
 		return (NULL);
-	ft_strcpy(strnew, (char*)s1);
-	ft_strcat(strnew, (char*)s2);
-	return (strnew);
+	if (start < ft_strlen(s))
+		while (i < len && s[start + i])
+		{
+			substr[i] = s[start + i];
+			i++;
+		}
+	substr[i] = '\0';
+	ft_strdel(s);
+	return (substr);
 }

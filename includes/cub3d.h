@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/09 08:21:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/17 18:54:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,17 @@
 # include "lib42.h"
 # include "cub_key.h"
 
-# define DISPLAY_X 2560
-# define DISPLAY_Y 1440
+# if __APPLE__
+
+#  define DISPLAY_X 2560
+#  define DISPLAY_Y 1440
+
+# elif __linux__
+
+#  define DISPLAY_X 1920
+#  define DISPLAY_Y 1080
+
+# endif
 
 # define MAP_DATA "012NEWS"
 # define SPRITES "2"
@@ -53,6 +62,12 @@ typedef struct		s_bmp
 	unsigned int	*width_entry;
 	unsigned int	*hight_entry;
 }					t_bmp;
+
+typedef struct		s_index
+{
+	int				i;
+	int				j;
+}					t_index;
 
 typedef struct		s_coord
 {
@@ -87,6 +102,15 @@ typedef struct		s_texture_data
 	t_coord			coord;
 }					t_texture_data;
 
+typedef struct		s_img
+{
+	int				bpp;
+	int				size;
+	void			*ptr;
+	int				*data;
+	int				endian;
+}					t_img;
+
 typedef struct		s_texture_img
 {
 	t_texture_data	north;
@@ -102,8 +126,8 @@ typedef struct		s_sprite_path
 
 typedef struct		s_sprite_data
 {
-	void			*ptr;
-	int				*img;
+	t_img			img;
+	t_coord			size;
 	t_fcoord		coord;
 }					t_sprite_data;
 
@@ -154,14 +178,11 @@ typedef struct		s_key_event
 	int				(*event)();
 }					t_key_event;
 
-typedef struct		s_img
+typedef struct		s_key_bit
 {
-	int				bpp;
-	int				size;
-	void			*ptr;
-	int				*data;
-	int				endian;
-}					t_img;
+	int				key;
+	int				pos;
+}					t_key_bit;
 
 typedef struct		s_mlx
 {
@@ -186,7 +207,6 @@ typedef struct		s_raycast
 	int				color;
 	int				line_h;
 	float			PWDist;
-	float			*cast;
 	t_coord			map;
 	t_coord			step;
 	t_fcoord		cam;
@@ -206,6 +226,8 @@ typedef struct		s_engine
 {
 	float			rotS;
 	float			moveS;
+	float			*Zbuff;
+	unsigned int	key;
 	t_camera		cam;
 	t_map_eng		map;
 	t_sprite		sprite;
@@ -232,6 +254,9 @@ void				ft_bmp(t_garbage garb, int save);
 
 void				ft_get_textures_img(t_engine *e, t_mlx *m, t_parsing p);
 void				ft_texturing(t_garbage g, t_texture_data *t, t_raycast *r);
+
+// void				ft_init_sprites(t_mlx *mlx, t_engine *eng, t_parsing *pars);
+// void				ft_sprite(t_engine *e, t_mlx *m, t_parsing *p, t_raycast r);
 
 int					ft_check_parsing(t_parsing parse);
 void				ft_free_parsing(t_parsing *parse);

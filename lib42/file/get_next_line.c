@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:04:19 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/02/07 20:30:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/18 01:08:24 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@ static char		*ft_getline(char **buffer, int size, int *ret)
 	i = (i == -1 ? size : i);
 	line = ft_substr(tmp, 0, i);
 	if (i + 1 < size)
+	{
+		ft_putstr("BITE\n");
 		*buffer = ft_substr(tmp, i + 1, size);
+	}
 	else
 		*buffer = NULL;
-	free(tmp);
+	ft_strdel(tmp);
 	return (line);
 }
 
@@ -72,7 +75,7 @@ int				get_next_line(int fd, char **line)
 	if ((i = ft_strclen(buffer, '\n')) == -1 &&
 	(ret = ft_getbuff(&buffer, fd)) == -1)
 	{
-		ft_memdel((void**)&buffer);
+		ft_strdel(buffer);
 		return (-1);
 	}
 	*line = ft_getline(&buffer, ft_strlen(buffer), &ret);

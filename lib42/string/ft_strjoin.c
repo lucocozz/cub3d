@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2019/12/05 02:42:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/03/10 04:09:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int		i;
-	int		j;
 	char	*strnew;
 
-	i = 0;
-	j = 0;
 	if (!s1 || !s2)
 		return (NULL);
 	if (s1[0] == '\0' && s2[0] == '\0')
