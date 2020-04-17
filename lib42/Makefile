@@ -52,7 +52,7 @@ OBJS_S= $(SRCS:%.c=%.o)
 
 CC= gcc
 
-CFLAGS= -Wall -Wextra -Werror -I ./includes
+CFLAGS= -Wall -Wextra -Werror -I ./includes -g3 -fsanitize=address
 
 all: $(NAME)
 
