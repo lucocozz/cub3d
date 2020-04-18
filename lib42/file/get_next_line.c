@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/12 17:04:19 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/18 01:27:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/18 03:35:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static char		*ft_getline(char **buffer, int size, int *ret)
 	char	*line;
 
 	tmp = *buffer;
-	i = ft_strclen(tmp, '\n');
+	i = ft_strchri(tmp, '\n');
 	*ret = (i == -1 ? 0 : 1);
 	i = (i == -1 ? size : i);
 	line = ft_substr(tmp, 0, i);
@@ -27,7 +27,7 @@ static char		*ft_getline(char **buffer, int size, int *ret)
 		*buffer = ft_substr(tmp, i + 1, size);
 	else
 		*buffer = NULL;
-	ft_strdel(tmp);
+	free(tmp);
 	return (line);
 }
 
@@ -35,8 +35,11 @@ static int		ft_getbuff(char **buffer, int fd)
 {
 	int		chr;
 	int		size;
+	char	*tmp_cat;
+	char	*tmp_buff;
 	char	tmp_read[BUFFER_SIZE + 1];
 
+	tmp_buff = *buffer;
 	while (1)
 	{
 		ft_bzero(tmp_read, BUFFER_SIZE + 1);
@@ -44,11 +47,16 @@ static int		ft_getbuff(char **buffer, int fd)
 			return (-1);
 		else if (size == 0)
 			break ;
-		*buffer = ft_strjoin_free(*buffer, tmp_read);
-		chr = ft_strclen(tmp_read, '\n');
+		tmp_cat = ft_strjoin(tmp_buff, tmp_read);
+		if (tmp_buff)
+			free(tmp_buff);
+		tmp_buff = NULL;
+		ft_swap((void **)&tmp_cat, (void **)&tmp_buff);
+		chr = ft_strchri(tmp_read, '\n');
 		if (chr > -1 || (chr == -1 && size < BUFFER_SIZE))
 			break ;
 	}
+	*buffer = tmp_buff;
 	return (1);
 }
 
@@ -69,10 +77,11 @@ int				get_next_line(int fd, char **line)
 		}
 		buffer = ft_strdup(tmp);
 	}
-	if ((i = ft_strclen(buffer, '\n')) == -1 &&
+	if ((i = ft_strchri(buffer, '\n')) == -1 &&
 	(ret = ft_getbuff(&buffer, fd)) == -1)
 	{
-		ft_strdel(buffer);
+		if (buffer)
+			free(buffer);
 		return (-1);
 	}
 	*line = ft_getline(&buffer, ft_strlen(buffer), &ret);
