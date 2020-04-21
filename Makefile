@@ -4,11 +4,13 @@ FILE=	ft_parsing.c		ft_parsing2.c			ft_cub_utils.c		\
 		ft_events.c			ft_keys.c				ft_init_engine.c	\
 		ft_raycasting.c		ft_engine.c				ft_bmp.c			\
 		ft_keys2.c			ft_textures.c			ft_parsing3.c		\
-		ft_exit_cub.c		#ft_init_sprite.c		ft_sprite.c
+		ft_exit_cub.c
+		
+SPRITE=	ft_sprites.c		ft_sprite_lst.c
 
 MAIN=	main.c
 
-SRCS=	$(addprefix sources/, $(FILE))
+SRCS=	$(addprefix sources/, $(FILE)) $(addprefix sources/sprites/, $(SPRITE))
 
 OBJS_S=	$(SRCS:%.c=%.o)
 
@@ -16,7 +18,7 @@ CC=clang
 
 CFLAGS= -Wall -Wextra -Werror -I includes/ -I lib42/includes/			\
 -I /usr/local/include -L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11	\
--lm -lbsd -g3 -fsanitize=address
+-lm -lbsd -g#-g3 -fsanitize=address
 
 all: $(NAME)
 

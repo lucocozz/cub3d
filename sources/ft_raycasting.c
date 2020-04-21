@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:23:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/17 18:54:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/19 05:24:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void			ft_ray_hit(t_engine *eng, t_raycast *ray)
 			ray->map.y += ray->step.y;
 			ray->side = (ray->step.y == 1 ? SOUTH : NORTH);
 		}
-		if (eng->map.array[ray->map.y][ray->map.x] > 0)
+		if (eng->map.array[ray->map.y][ray->map.x] == 1)
 			ray->hit = 1;
 	}
 }

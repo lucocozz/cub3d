@@ -6,26 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:05:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/17 18:56:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/19 00:20:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	ft_free_sprite(t_garbage *garb)
-{
-	int	i;
-
-	i = 0;
-	if (garb->engine->sprite.data)
-	{
-		while (i < garb->engine->sprite.nb)
-			mlx_destroy_image(garb->mlx->ptr, garb->engine->sprite.data[i].img.ptr);
-		ft_memdel((void**)&garb->engine->sprite.data);
-	}
-	ft_memdel((void**)&garb->engine->sprite.dist);
-	ft_memdel((void**)&garb->engine->sprite.order);
-}
 
 int		ft_exit_cub(t_garbage *garb)
 {

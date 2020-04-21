@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/17 18:54:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/19 20:18:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <sys/stat.h>
+
 # include "lib42.h"
 # include "cub_key.h"
 
@@ -45,6 +47,8 @@
 # define N_SPRITES 1
 # define N_COLORS 2
 # define N_KEYS	7
+
+typedef struct		s_sprite_lst t_sprite_lst;
 
 typedef struct		s_pixel
 {
@@ -124,19 +128,30 @@ typedef struct		s_sprite_path
 	char			*sprite;
 }					t_sprite_path;
 
-typedef struct		s_sprite_data
+struct		s_sprite_lst
 {
+	float			dist;
 	t_img			img;
 	t_coord			size;
 	t_fcoord		coord;
-}					t_sprite_data;
+	t_sprite_lst	*next;
+};
 
 typedef struct		s_sprite
 {
 	int				nb;
-	int				*dist;
-	int				*order;
-	t_sprite_data	*data;
+	int				d;
+	int				color;
+	int				stripe;
+	int				screenX;
+	float			invDet;
+	t_coord			tex;
+	t_coord			start;
+	t_coord			end;
+	t_coord			size;
+	t_fcoord		transf;
+	t_fcoord		coord;
+	t_sprite_lst	*data;
 }					t_sprite;
 
 typedef	struct		s_color_cub
@@ -255,8 +270,11 @@ void				ft_bmp(t_garbage garb, int save);
 void				ft_get_textures_img(t_engine *e, t_mlx *m, t_parsing p);
 void				ft_texturing(t_garbage g, t_texture_data *t, t_raycast *r);
 
-// void				ft_init_sprites(t_mlx *mlx, t_engine *eng, t_parsing *pars);
-// void				ft_sprite(t_engine *e, t_mlx *m, t_parsing *p, t_raycast r);
+void				ft_sprite(t_engine *eng, t_mlx *mlx, t_parsing *parse);
+void				ft_push_sprite(t_sprite_lst **sprites, t_garbage *garb,
+					t_coord axe, int texture);
+void				ft_free_sprite(t_garbage *garb);
+void				ft_sort_sprite(t_sprite_lst **sprites);
 
 int					ft_check_parsing(t_parsing parse);
 void				ft_free_parsing(t_parsing *parse);

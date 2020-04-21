@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:18:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/08 03:23:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/04/19 03:11:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int			main(int ac, char **av)
 	mlx = ft_init_mlx(parse);
 	ft_get_textures_img(&engine, &mlx, parse);
 	ft_raycast(&parse, &engine, &mlx);
+	ft_sprite(&engine, &mlx, &parse);
 	ft_bmp((t_garbage){&parse, &mlx, &engine}, save);
 	ft_events_hook((t_garbage){&parse, &mlx, &engine});
 	return (0);
