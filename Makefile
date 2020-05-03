@@ -1,24 +1,21 @@
 NAME=	Cub3d
 
-FILE=	ft_parsing.c		ft_parsing2.c			ft_cub_utils.c		\
-		ft_events.c			ft_keys.c				ft_init_engine.c	\
-		ft_raycasting.c		ft_engine.c				ft_bmp.c			\
-		ft_keys2.c			ft_textures.c			ft_parsing3.c		\
-		ft_exit_cub.c
-		
-SPRITE=	ft_sprites.c		ft_sprite_lst.c
+FILE=	main.c				ft_parsing.c			ft_parsing2.c		\
+		ft_cub_utils.c		ft_events.c				ft_keys.c			\
+		ft_init_engine.c	ft_raycasting.c			ft_engine.c			\
+		ft_bmp.c			ft_keys2.c				ft_textures.c		\
+		ft_parsing3.c		ft_exit_cub.c			ft_sprites.c		\
+		ft_sprite_lst.c
 
-MAIN=	main.c
-
-SRCS=	$(addprefix sources/, $(FILE)) $(addprefix sources/sprites/, $(SPRITE))
+SRCS=	$(addprefix sources/, $(FILE))
 
 OBJS_S=	$(SRCS:%.c=%.o)
 
 CC=clang
 
-CFLAGS= -Wall -Wextra -Werror -I includes/ -I lib42/includes/			\
+CFLAGS= -Wall -Wextra -Werror -I includes/ -I lib42/includes/				\
 -I /usr/local/include -L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11	\
--lm -lbsd -g#-g3 -fsanitize=address
+-lm -lbsd #-g3 -fsanitize=address
 
 all: $(NAME)
 
@@ -26,7 +23,7 @@ lib:
 	$(MAKE) -C lib42
 
 $(NAME): lib
-	$(CC) $(MAIN) $(SRCS) -o $(NAME) $(CFLAGS)
+	$(CC) $(SRCS) -o $(NAME) $(CFLAGS)
 
 clean:
 	rm -f $(OBJS_S)

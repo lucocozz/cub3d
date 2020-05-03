@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 01:05:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/15 20:18:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/03 23:46:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,31 +18,11 @@ static t_key_event	g_event[N_KEYS] = {
 	{LEFT_KEY, &ft_left_key}
 };
 
-// static t_key_bit	g_bit[N_KEYS] = {
-// 	{ESC_KEY, 0}, {W_KEY, 1}, {A_KEY, 2}, {S_KEY, 3}, {D_KEY, 4},
-// 	{RIGHT_KEY, 5}, {LEFT_KEY, 6}	
-// };
-
-static void	ft_keys(t_garbage *garb)
-{
-	int	i;
-
-	i = 0;
-	if (garb->engine->key)
-		while (i < N_KEYS)
-		{
-			if ((garb->engine->key >> i) & 1)
-				g_event[i].event(garb);
-			i++;
-		}
-}
-
 void		ft_events_hook(t_garbage garbage)
 {
 	t_mlx	*mlx;
 
 	mlx = garbage.mlx;
-	mlx_do_key_autorepeaton(mlx->ptr);
 	mlx_hook(mlx->win, DESTROYNOTIFY, 0, &ft_exit_cub, (void*)&garbage);
 	mlx_hook(mlx->win, KEYPRESS, 1, &ft_press_event, (void*)&garbage);
 	mlx_hook(mlx->win, KEYRELEASE, 2, &ft_release_event, (void*)&garbage);
@@ -60,7 +40,6 @@ int			ft_press_event(int key, t_garbage *garb)
 	if (i == N_KEYS)
 		return (0);
 	garb->engine->key |= 1 << i;
-	ft_keys(garb);
 	return (1);
 }
 
@@ -78,9 +57,17 @@ int			ft_release_event(int key, t_garbage *garb)
 	return (1);
 }
 
-int			ft_loop_event(int key, t_garbage *garb)
+int			ft_loop_event(t_garbage *garb)
 {
-	(void)key;
-	(void)garb;
+	int	i;
+
+	i = 0;
+	if (garb->engine->key)
+		while (i < N_KEYS)
+		{
+			if ((garb->engine->key >> i) & 1)
+				g_event[i].event(garb);
+			i++;
+		}
 	return (1);
 }

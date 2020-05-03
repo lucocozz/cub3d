@@ -6,13 +6,29 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:20:41 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/14 21:18:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/03 00:42:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	ft_w_key(t_garbage *garb)
+static int	ft_hitbox(const int nb, const char *str)
+{
+	size_t i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (nb == str[i] - '0' && ft_isdigit(str[i]))
+			return (1);
+		else if (nb == (int)str[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int			ft_w_key(t_garbage *garb)
 {
 	t_mlx		*mlx;
 	t_parsing	*parse;
@@ -21,17 +37,17 @@ int	ft_w_key(t_garbage *garb)
 	mlx = garb->mlx;
 	eng = garb->engine;
 	parse = garb->parse;
-	if (eng->map.array[(int)(eng->cam.pos.y + eng->cam.dir.y * eng->moveS)]
-	[(int)eng->cam.pos.x] == 0)
+	if (ft_hitbox(eng->map.array[(int)(eng->cam.pos.y + eng->cam.dir.y
+	* eng->moveS)][(int)eng->cam.pos.x], HITBOX) == 0)
 		eng->cam.pos.y += eng->cam.dir.y * eng->moveS;
-	if (eng->map.array[(int)eng->cam.pos.y]
-	[(int)(eng->cam.pos.x + eng->cam.dir.x * eng->moveS)] == 0)
+	if (ft_hitbox(eng->map.array[(int)eng->cam.pos.y]
+	[(int)(eng->cam.pos.x + eng->cam.dir.x * eng->moveS)], HITBOX) == 0)
 		eng->cam.pos.x += eng->cam.dir.x * eng->moveS;
 	ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
-int	ft_s_key(t_garbage *garb)
+int			ft_s_key(t_garbage *garb)
 {
 	t_mlx		*mlx;
 	t_parsing	*parse;
@@ -40,17 +56,17 @@ int	ft_s_key(t_garbage *garb)
 	mlx = garb->mlx;
 	eng = garb->engine;
 	parse = garb->parse;
-	if (eng->map.array[(int)(eng->cam.pos.y - eng->cam.dir.y * eng->moveS)]
-	[(int)eng->cam.pos.x] == 0)
+	if (ft_hitbox(eng->map.array[(int)(eng->cam.pos.y - eng->cam.dir.y
+	* eng->moveS)][(int)eng->cam.pos.x], HITBOX) == 0)
 		eng->cam.pos.y -= eng->cam.dir.y * eng->moveS;
-	if (eng->map.array[(int)eng->cam.pos.y]
-	[(int)(eng->cam.pos.x - eng->cam.dir.x * eng->moveS)] == 0)
+	if (ft_hitbox(eng->map.array[(int)eng->cam.pos.y]
+	[(int)(eng->cam.pos.x - eng->cam.dir.x * eng->moveS)], HITBOX) == 0)
 		eng->cam.pos.x -= eng->cam.dir.x * eng->moveS;
 	ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
-int	ft_a_key(t_garbage *garb)
+int			ft_a_key(t_garbage *garb)
 {
 	t_mlx		*mlx;
 	t_parsing	*parse;
@@ -59,17 +75,17 @@ int	ft_a_key(t_garbage *garb)
 	mlx = garb->mlx;
 	eng = garb->engine;
 	parse = garb->parse;
-	if (eng->map.array[(int)(eng->cam.pos.y - eng->cam.plane.y * eng->moveS)]
-	[(int)eng->cam.pos.x] == 0)
+	if (ft_hitbox(eng->map.array[(int)(eng->cam.pos.y - eng->cam.plane.y
+	* eng->moveS)][(int)eng->cam.pos.x], HITBOX) == 0)
 		eng->cam.pos.y -= eng->cam.plane.y * eng->moveS;
-	if (eng->map.array[(int)eng->cam.pos.y]
-	[(int)(eng->cam.pos.x - eng->cam.plane.x * eng->moveS)] == 0)
+	if (ft_hitbox(eng->map.array[(int)eng->cam.pos.y]
+	[(int)(eng->cam.pos.x - eng->cam.plane.x * eng->moveS)], HITBOX) == 0)
 		eng->cam.pos.x -= eng->cam.plane.x * eng->moveS;
 	ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
-int	ft_d_key(t_garbage *garb)
+int			ft_d_key(t_garbage *garb)
 {
 	t_mlx		*mlx;
 	t_parsing	*parse;
@@ -78,11 +94,11 @@ int	ft_d_key(t_garbage *garb)
 	mlx = garb->mlx;
 	eng = garb->engine;
 	parse = garb->parse;
-	if (eng->map.array[(int)(eng->cam.pos.y + eng->cam.plane.y * eng->moveS)]
-	[(int)eng->cam.pos.x] == 0)
+	if (ft_hitbox(eng->map.array[(int)(eng->cam.pos.y + eng->cam.plane.y
+	* eng->moveS)][(int)eng->cam.pos.x], HITBOX) == 0)
 		eng->cam.pos.y += eng->cam.plane.y * eng->moveS;
-	if (eng->map.array[(int)eng->cam.pos.y]
-	[(int)(eng->cam.pos.x + eng->cam.plane.x * eng->moveS)] == 0)
+	if (ft_hitbox(eng->map.array[(int)eng->cam.pos.y]
+	[(int)(eng->cam.pos.x + eng->cam.plane.x * eng->moveS)], HITBOX) == 0)
 		eng->cam.pos.x += eng->cam.plane.x * eng->moveS;
 	ft_display_img(eng, parse, mlx);
 	return (1);

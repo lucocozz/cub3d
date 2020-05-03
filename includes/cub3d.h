@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/19 20:18:52 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/03 23:51:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,14 @@
 
 # endif
 
+# ifndef M_PI
+#  define M_PI 3.141593
+# endif
+
 # define MAP_DATA "012NEWS"
+# define PLAYER "NEWS"
 # define SPRITES "2"
+# define HITBOX "12"
 
 # define NORTH 3
 # define SOUTH 2
@@ -47,6 +53,9 @@
 # define N_SPRITES 1
 # define N_COLORS 2
 # define N_KEYS	7
+
+# define SPEED 0.10
+# define ROT 0.03
 
 typedef struct		s_sprite_lst t_sprite_lst;
 
@@ -139,10 +148,9 @@ struct		s_sprite_lst
 
 typedef struct		s_sprite
 {
-	int				nb;
 	int				d;
+	int				nb;
 	int				color;
-	int				stripe;
 	int				screenX;
 	float			invDet;
 	t_coord			tex;
@@ -290,7 +298,7 @@ void				ft_events_hook(t_garbage garbage);
 int					ft_exit_cub(t_garbage *garb);
 int					ft_press_event(int key, t_garbage *garb);
 int					ft_release_event(int key, t_garbage *garb);
-int					ft_loop_event(int key, t_garbage *garb);
+int					ft_loop_event(t_garbage *garb);
 
 int					ft_w_key(t_garbage *garb);
 int					ft_a_key(t_garbage *garb);

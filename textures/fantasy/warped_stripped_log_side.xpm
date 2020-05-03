@@ -1,0 +1,29 @@
+/* XPM */
+static char *warped_stripped_log_side[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 7 1 ",
+"  c #2E8578",
+". c #318B85",
+"X c #318D8C",
+"o c #36948E",
+"O c #3B9997",
+"+ c #3DA9A6",
+"@ c #44A19F",
+/* pixels */
+"OoOO@X@@@O@@OXOX",
+"XOoO@X@@O@@+OXX ",
+".OXOOX@OO@O+O.X.",
+" XoOXX@OO@O+@.XX",
+".XXoo@OO@@O@@@XO",
+"O.Oo@+OO@+O+@XXO",
+"O Oo@+O@@+OOOoX.",
+"O Xo@@O@@@@XOoX ",
+" .XX@@O+O+@XO@o.",
+"OXOo@OO+OO@@O@. ",
+"O.OoOOO@XO@@OO. ",
+" OO@OoO@XX@XOXX.",
+" X.@+o@@OXOXX. .",
+"O..O@o@OO+XO.. .",
+"O XOOoO@O@XO.XX ",
+"O.@@OO@@O@@OO@X "
+};

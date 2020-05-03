@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:55:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/19 00:01:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/03 23:26:44 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ static void	ft_set_cam(t_parsing *parse, t_engine *engine, int x, int y)
 static void	ft_data(t_parsing *parse, t_engine *engine)
 {
 	engine->sprite.data = NULL;
-	engine->moveS = 0.15;
-	engine->rotS = 0.05;
+	engine->moveS = SPEED;
+	engine->rotS = ROT;
 	engine->key = 0;
 	if ((engine->Zbuff = malloc(sizeof(float) * parse->size.x)) == NULL)
 	{
@@ -98,10 +98,12 @@ t_engine	ft_init_engine(t_parsing *parse)
 		x = 0;
 		while (x < parse->map.x)
 		{
-			if (ft_isalpha(parse->map.array[y][x]))
+			if (ft_strchr(PLAYER, parse->map.array[y][x]))
 				ft_set_cam(parse, &engine, x, y);
-			else
+			else if (ft_isdigit(parse->map.array[y][x]))
 				engine.map.array[y][x] = parse->map.array[y][x] - '0';
+			else
+				engine.map.array[y][x] = (int)parse->map.array[y][x];
 			x++;
 		}
 		y++;
