@@ -1,0 +1,33 @@
+/* XPM */
+static char *chiseled_sandstone[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 11 1 ",
+"  c #2D2D2D",
+". c #353630",
+"X c #444243",
+"o c #4D4D45",
+"O c #54524F",
+"+ c #575651",
+"@ c #62605C",
+"# c #D3A036",
+"$ c #86847F",
+"% c #97948F",
+"& c #A9A69F",
+/* pixels */
+"O$O# O$oo$O# @$O",
+"O%O #O%XX%O #@%O",
+"O%O# O%++%O# @%O",
+"O&O #O&..&O #@&O",
+"O&O# O&oo&O# @&O",
+"O%O #O%XX%O #@%O",
+"O$O# O$++$O# @$O",
+"O%O #O%..%O #@%O",
+"O%O# O%oo%O# @%O",
+"O&O #O&XX&O #@&O",
+"O%O# O%++%O# @%O",
+"O%O #O%..%O #@%O",
+"O$O# O$oo$O# @$O",
+"O%O #O%XX%O #@%O",
+"O&O# O&++&O# @&O",
+"O&O #O&..&O #@&O"
+};

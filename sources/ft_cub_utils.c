@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 21:38:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/10 05:00:48 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/06 22:07:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ t_parsing		ft_init_parsing(void)
 		((char **)(&parse.sprite))[i++] = NULL;
 	i = 0;
 	while (i < N_COLORS)
-		((int *)(&parse.color))[i++] = 0;
+		((int *)(&parse.color))[i++] = -1;
 	i = 0;
 	while (i < 2)
 		((int *)(&parse.size))[i++] = 0;
@@ -42,19 +42,23 @@ int				ft_check_parsing(t_parsing parse)
 	i = 0;
 	while (i < N_TEXTURES)
 		if (((char **)(&parse.texture))[i++] == NULL)
-			return (0);
+			return (-1);
 	i = 0;
 	while (i < N_SPRITES)
 		if (((char **)(&parse.sprite))[i++] == NULL)
-			return (0);
+			return (-1);
 	i = 0;
 	while (i < 2)
 		if (((int *)(&parse.size))[i++] == 0)
-			return (0);
+			return (-1);
+	if (parse.color.roof == -1)
+		return (-1);
+	if (parse.color.top == -1)
+		return (-1);
 	if (parse.map.array == NULL)
 		return (0);
 	if (parse.map.x < 3 || parse.map.y < 3)
-		return (0);
+		return (-1);
 	return (1);
 }
 

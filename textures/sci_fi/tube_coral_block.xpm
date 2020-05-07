@@ -1,0 +1,28 @@
+/* XPM */
+static char *tube_coral_block[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 6 1 ",
+"  c #262776",
+". c #2F3089",
+"X c #3739A0",
+"o c #455BBE",
+"O c #7085D6",
+"+ c #899CD8",
+/* pixels */
+"O+XX  XoXXoOX.O+",
+"oO.O+ OXO+  . oO",
+" X oOXOXoOX O+.X",
+"OX  X+XOXXOXoOXO",
+"XO+XoO XO+XO.  O",
+".oOX.  XoO.  O+X",
+". XOXO+ .XO+XoO.",
+"+  X oO. .oO .XO",
+"OXO+  XXO+.  OXo",
+"X.oOXO+XoOXO+XOX",
+"O+.X oO. ..oO o+",
+"oX O+X.  O+X  .O",
+".O+ O.XO+XO .O+X",
+" oOX.  oO XOXoO.",
+"+  .O+XX O XOX.O",
+"OXO oO O+XO+XOXo"
+};

@@ -1,0 +1,28 @@
+/* XPM */
+static char *lime_concrete[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 6 1 ",
+"  c #637F2F",
+". c #638030",
+"X c #648030",
+"o c #648130",
+"O c #658231",
+"+ c #668231",
+/* pixels */
+".O+OoXoOOo.  ooo",
+"ooo.oooO OO.oo .",
+".o O +oOO  o. OX",
+"O+o.ooO+.OO ooOO",
+"oo+OoOoXoOo.OO..",
+" ..o .o. O.Xo +.",
+"o oX OOOX OO.OO ",
+"o +.oOo. O  OOO ",
+"  oX OO+..+OO +o",
+"O.o+OO+o.+oOO+X+",
+".XoOOooO.OoOOoo ",
+"O.OOo .oO  . oXo",
+".OooOOo+.+o.ooo.",
+".OoO.+ o  oO .o+",
+"+..X.O...O oOOO+",
+"  .oo. .O.o oOOO"
+};

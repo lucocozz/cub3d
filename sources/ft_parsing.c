@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/10 04:36:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/07 05:00:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,20 @@ void		ft_parse_color(t_parsing *parse, char **data)
 	char	**rgb;
 
 	i = 0;
+	if (ft_matrice_len(data) != 2)
+	{
+		ft_free_matrice((void **)data, 2);
+		ft_exit_parsing(parse, "Bad color format.\n");
+	}
 	while (ft_strcmp(data[0], g_color[i].hash) && i < N_COLORS)
 		i++;
 	rgb = ft_split(data[1], ',');
+	if (ft_matrice_len(rgb) != 3)
+	{
+		ft_free_matrice((void **)data, 2);
+		ft_free_matrice((void **)rgb, 3);
+		ft_exit_parsing(parse, "Bad rgb format.\n");
+	}
 	((int *)(&parse->color))[i] += ft_atoi(rgb[0]) << 16;
 	((int *)(&parse->color))[i] += ft_atoi(rgb[1]) << 8;
 	((int *)(&parse->color))[i] += ft_atoi(rgb[2]);
@@ -45,6 +56,11 @@ void		ft_parse_color(t_parsing *parse, char **data)
 
 void		ft_parse_resolution(t_parsing *parse, char **data)
 {
+	if (ft_matrice_len(data) != 3)
+	{
+		ft_free_matrice((void **)data, 3);
+		ft_exit_parsing(parse, "Bad resolution format.\n");
+	}
 	parse->size.x = ft_atoi(data[1]);
 	parse->size.y = ft_atoi(data[2]);
 	if (parse->size.x > DISPLAY_X)
@@ -60,19 +76,18 @@ void		ft_parse_textures(t_parsing *parse, char **data)
 	int	fd;
 
 	i = 0;
+	if (ft_matrice_len(data) != 2)
+	{
+		ft_free_matrice((void **)data, 2);
+		ft_exit_parsing(parse, "Bad texture format.\n");
+	}
 	while (ft_strcmp(data[0], g_texture[i].hash))
 		i++;
 	((char **)(&parse->texture))[i] = data[1];
 	if (!ft_endswith(((char **)(&parse->texture))[i], ".xpm"))
-	{
-		ft_free_parsing(parse);
-		ft_exit_error("No xpm file.\n");
-	}
+		ft_exit_parsing(parse, "No xpm file.\n");
 	if ((fd = open(((char **)(&parse->texture))[i], O_RDONLY)) < 0)
-	{
-		ft_free_parsing(parse);
-		ft_exit_error("Can't open texture.\n");
-	}
+		ft_exit_parsing(parse, "Can't open texture.\n");
 	else
 		close(fd);
 	ft_strdel(data[0]);
@@ -82,14 +97,25 @@ void		ft_parse_textures(t_parsing *parse, char **data)
 void		ft_parse_data(t_parsing *parse, char *line)
 {
 	int		i;
+	int		len;
 	char	**data;
 
 	i = 0;
 	data = ft_split(line, ' ');
-	while (ft_strcmp(g_data_cub[i].data, data[0]) && i < N_DATA)
+	if ((len = ft_matrice_len(data)) == 1)
+	{
+		ft_strdel(line);
+		ft_free_matrice((void **)data, len);
+		ft_exit_parsing(parse, "Data can't be parsed.\n");
+	}
+	while (i < N_DATA && ft_strcmp(g_data_cub[i].data, data[0]))
 		i++;
 	if (i == N_DATA)
-		return ;
+	{
+		ft_strdel(line);
+		ft_free_matrice((void **)data, len);
+		ft_exit_parsing(parse, "Data can't be parsed.\n");
+	}
 	g_data_cub[i].function(parse, data);
 }
 
@@ -101,15 +127,18 @@ t_parsing	ft_parse_file(char *filename)
 
 	if ((fd = open(filename, O_RDONLY)) < 0)
 		ft_exit_error("Can't open file.\n");
+	parse = ft_init_parsing();
 	while (get_next_line(fd, &line))
 	{
-		if (ft_startswith(line, "1"))
-			ft_parse_map(&parse, ft_split(line, ' '), fd);
+		if (ft_check_parsing(parse) == 0)
+		{
+			ft_parse_map(&parse, line, fd);
+			break ;
+		}
 		else if (ft_strcmp(line, ""))
 			ft_parse_data(&parse, line);
 		ft_strdel(line);
 	}
-	ft_strdel(line);
 	close(fd);
 	return (parse);
 }

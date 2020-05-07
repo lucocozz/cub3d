@@ -1,0 +1,29 @@
+/* XPM */
+static char *red_sandstone_top[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 7 1 ",
+"  c #3E4043",
+". c #404145",
+"X c #414346",
+"o c #424447",
+"O c #45474A",
+"+ c #46484B",
+"@ c #47494B",
+/* pixels */
+"XoOoXOOXoXoOoXoO",
+"ooXXXooOooXXoOoX",
+"XOXXoo.ooOXXOOOo",
+"oo.O.XOXXoOXXXoO",
+"XOOOOoXXXOXoO.oo",
+"ooo X+XoXo@OOooX",
+"OXOoOOOooOXooooo",
+"oOOXXXoOXXXoOO O",
+"OXoXXOOo.XOOXOXO",
+"OXOXXooooOOXoXOX",
+"XXOooooXXXoXooXO",
+"ooOOXXoXOXooOOoO",
+"OooooOooXXoXoOXo",
+"oXoXoXXXo OXoXoX",
+"XOOX OoXOooooXoX",
+"OoXXOXX+XoXXXoOX"
+};

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:05:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/02 18:53:53 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/07 04:21:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,10 @@ int		ft_exit_cub(t_garbage *garb)
 	ft_memdel((void**)&garb->engine->Zbuff);
 	exit(EXIT_SUCCESS);
 	return (0);
+}
+
+void	ft_exit_parsing(t_parsing *parse, char *str)
+{
+	ft_free_parsing(parse);
+	ft_exit_error(str);
 }

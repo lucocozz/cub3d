@@ -1,0 +1,31 @@
+/* XPM */
+static char *brain_coral[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 9 1 ",
+"  c #4C6486",
+". c #637DA3",
+"X c #822D8E",
+"o c #9C2DA5",
+"O c #BB3CC8",
+"+ c #99AEE3",
+"@ c #B0C3ED",
+"# c #C3D9F4",
+"$ c None",
+/* pixels */
+"$$$$$$$$$$$$$$$$",
+"$$$$$$$$$$$@#$$$",
+"$$$@+$$$$$+. @$$",
+"$$+. #$$$@.oO.#$",
+"$#.Oo.@$# Ooo @$",
+"#.ooo +$@.ooX.+$",
+"@ OooX.@+.XooO #",
+"+.oXOo#. #@Ooo.@",
+"+ oOo@.Xo .@oX #",
+"$+ oo# OoOo.#o.+",
+"$@.oO@.oXoX @o.#",
+"$#.X@ OooOo.+O @",
+"$@ o@.oXoo.#Xo.#",
+"$#.O+ oooO @oX.+",
+"$+ oX#.OoX.+X.+$",
+"$$+.o+ oOo + .+$"
+};

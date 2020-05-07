@@ -1,0 +1,28 @@
+/* XPM */
+static char *dead_tube_coral_block[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 6 1 ",
+"  c #285B51",
+". c #31695D",
+"X c #3A7A6B",
+"o c #469270",
+"O c #68AC8B",
+"+ c #9ECDB6",
+/* pixels */
+"O+XX  XoXXoOX.O+",
+"oO.O+ OXO+  . oO",
+" X oOXOXoOX O+.X",
+"OX  X+XOXXOXoOXO",
+"XO+XoO XO+XO.  O",
+".oOX.  XoO.  O+X",
+". XOXO+ .XO+XoO.",
+"+  X oO. .oO .XO",
+"OXO+  XXO+.  OXo",
+"X.oOXO+XoOXO+XOX",
+"O+.X oO. ..oO o+",
+"oX O+X.  O+X  .O",
+".O+ O.XO+XO .O+X",
+" oOX.  oO XOXoO.",
+"+  .O+XX O XOX.O",
+"OXO oO O+XO+XOXo"
+};

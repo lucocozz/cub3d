@@ -1,0 +1,30 @@
+/* XPM */
+static char *tube_coral[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 8 1 ",
+"  c #1E1F6A",
+". c #3436A0",
+"X c #4042B5",
+"o c #4C4ECB",
+"O c #5E7DE3",
+"+ c #98B1F1",
+"@ c #B6C8F1",
+"# c None",
+/* pixels */
+"################",
+"################",
+"#########..#####",
+"#####..#.  .####",
+"####.  o.. o#..#",
+"#..#X .o.O.X.  o",
+".  .o.@..+@Xoo X",
+". ...O+XOXX.OXo#",
+"X.+o.+@oX  X+@o#",
+"#..@oO+o.XX.@o##",
+"o  ..OXX.oo.+.o#",
+".o..oo ..O+o.o o",
+".O+@oXo@XO@.X+o.",
+"#oO@o.O+XO+.o@X#",
+"##.+@oXOXO+o+OX#",
+"##.oO+XOXXOoOo##"
+};

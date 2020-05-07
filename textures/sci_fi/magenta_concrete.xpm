@@ -1,0 +1,27 @@
+/* XPM */
+static char *magenta_concrete[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 5 1 ",
+"  c #883C82",
+". c #893C83",
+"X c #8A3C84",
+"o c #8B3D85",
+"O c #8B3E85",
+/* pixels */
+"XXooO.oOoXXX.ooX",
+"oooOOOXOoX.ooXXo",
+"OoXXooOXoo.XooOo",
+"oO.oOXO. o.X.XXo",
+"XXX.o.XOOX..O OX",
+"oo.O XO oXXXO.XX",
+"OO XOXO. o  XXX ",
+"OOO. OXoXXoXXXoo",
+"Ooo.oXO.XX.oO.XO",
+"OOOOXO.XoXX.XO o",
+"o Xoo .XXXoXoooo",
+"OoOoX.XoOX ... o",
+"O O.oOXOX.XooXoX",
+"o OoXXXOXXXOooXX",
+"XoXo.XooX.XOXOOo",
+"XXooXXXXO.Xo oXo"
+};

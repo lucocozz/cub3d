@@ -1,0 +1,25 @@
+/* XPM */
+static char *light_gray_stained_glass[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1 ",
+"  c #A3BABD",
+". c #A1B9BF",
+"X c None",
+/* pixels */
+"XX.XXX.XXX.XXX.X",
+"X X X X X X X X ",
+".XXX.XXX.XXX.XXX",
+"X X X X X X X X ",
+"XX.XXX.XXX.XXX.X",
+"X X X X X X X X ",
+".XXX.XXX.XXX.XXX",
+"X X X X X X X X ",
+"XX.XXX.XXX.XXX.X",
+"X X X X X X X X ",
+".XXX.XXX.XXX.XXX",
+"X X X X X X X X ",
+"XX.XXX.XXX.XXX.X",
+"X X X X X X X X ",
+".XXX.XXX.XXX.XXX",
+"X X X X X X X X "
+};

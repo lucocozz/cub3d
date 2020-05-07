@@ -1,0 +1,27 @@
+/* XPM */
+static char *red_nether_bricks[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 5 1 ",
+"  c #303133",
+". c #353639",
+"X c #3B3C3E",
+"o c #414144",
+"O c #565655",
+/* pixels */
+"oO .oO .oO .oO .",
+" .oO .oO .oO .oO",
+"oO XoO XoO XoO X",
+" .oO XoO .oO XoO",
+"oO .oO .oO .oO .",
+" XoO .oO XoO .oO",
+"oO .oO .oO .oO .",
+" .oO .oO .oO .oO",
+"oO XoO XoO XoO X",
+" .oO .oO .oO .oO",
+"oO XoO XoO XoO X",
+" .oO XoO .oO XoO",
+"oO .oO .oO .oO .",
+" XoO .oO XoO .oO",
+"oO .oO .oO .oO .",
+" .oO .oO .oO .oO"
+};

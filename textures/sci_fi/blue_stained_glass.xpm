@@ -1,0 +1,25 @@
+/* XPM */
+static char *blue_stained_glass[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 3 1 ",
+"  c #0059B7",
+". c #63C1FF",
+"X c None",
+/* pixels */
+"XXXX.     .XXXXX",
+"XXX. ..... .XXXX",
+"XX. .XXXXX. .XXX",
+".. .XXXXXXX. ...",
+"  .XXXXXXXXX.   ",
+".. .XXXXXXX. ...",
+"XX. .XXXXX. .XXX",
+"XXX. ..... .XXXX",
+"XXXX.     .XXXXX",
+"XXX. ..... .XXXX",
+"XX. .XXXXX. .XXX",
+".. .XXXXXXX. ...",
+"  .XXXXXXXXX.   ",
+".. .XXXXXXX. ...",
+"XX. .XXXXX. .XXX",
+"XXX. ..... .XXXX"
+};

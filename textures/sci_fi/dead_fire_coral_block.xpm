@@ -1,0 +1,36 @@
+/* XPM */
+static char *dead_fire_coral_block[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 14 1 ",
+"  c #791A26",
+". c #8C1D2A",
+"X c #A4222F",
+"o c #C62A37",
+"O c #D2434E",
+"+ c #53866D",
+"@ c #5C886F",
+"# c #678A71",
+"$ c #768D75",
+"% c #7B997F",
+"& c #34DFA8",
+"* c #65F5C7",
+"= c #A9B189",
+"- c #9BFFDF",
+/* pixels */
+"&XX&oO.*oX* *oX&",
+"&# *Xo.&.+& &o&%",
+"X& *Xo= O&o&+&#o",
+" &.=@.&X&Xo& .-X",
+"X &%&.*o&X&.O&$*",
+"% * &X--@&$oX*O&",
+"&o-X$&O*.&X.* o$",
+"&o* .&o&XX& *.o+",
+"X& oO#&$oo+*.oo ",
+"&@& o.&XOoX*oX-&",
+"X.*o.&*.o &&o&Xo",
+"oX-o&@O*.& .&@&o",
+"oO*X&oo-O&.X*X&o",
+"o-#*+&X*&$&o-o&X",
+"o&.*.&#&Xo#&*o.&",
+"&X.&X.&-oXX$-oX&"
+};

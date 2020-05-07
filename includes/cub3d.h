@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/03 23:51:26 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/07 04:22:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@
 # define MAP_DATA "012NEWS"
 # define PLAYER "NEWS"
 # define SPRITES "2"
-# define HITBOX "12"
+# define HITBOX "1"
 
 # define NORTH 3
 # define SOUTH 2
@@ -54,7 +54,7 @@
 # define N_COLORS 2
 # define N_KEYS	7
 
-# define SPEED 0.10
+# define SPEED 0.075
 # define ROT 0.03
 
 typedef struct		s_sprite_lst t_sprite_lst;
@@ -287,8 +287,9 @@ void				ft_sort_sprite(t_sprite_lst **sprites);
 int					ft_check_parsing(t_parsing parse);
 void				ft_free_parsing(t_parsing *parse);
 void				ft_exit_parse_map(char *s, t_parsing *c_d, t_list *lst);
+void				ft_exit_parsing(t_parsing *parse, char *str);
 
-void				ft_parse_map(t_parsing *parse, char **data, int fd);
+void				ft_parse_map(t_parsing *parse, char *line, int fd);
 void				ft_parse_color(t_parsing *parse, char **data);
 void				ft_parse_sprites(t_parsing *parse, char **data);
 void				ft_parse_textures(t_parsing *parse, char **data);

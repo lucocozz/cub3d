@@ -1,0 +1,26 @@
+/* XPM */
+static char *birch_trapdoor[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 4 1 ",
+"  c #68646D",
+". c #878285",
+"X c #ADA7A5",
+"o c #BEB6B4",
+/* pixels */
+"XXoooXXoXXoXXXoX",
+" .X.......... .X",
+" .X           .X",
+"   XXoXXoXXoo   ",
+"XXoX........XoXX",
+" .X.......... .X",
+" .X.......... .X",
+"                ",
+"XXXoXXXXoXXXoooX",
+" .X.......... .X",
+" .X.......... .X",
+"    ........    ",
+"XXo          XXo",
+" .XXXXoXXoooX .X",
+" .X.......... .X",
+"                "
+};

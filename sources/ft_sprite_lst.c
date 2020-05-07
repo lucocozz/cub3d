@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 19:35:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/02 18:54:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/07 05:11:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void				ft_sort_sprite(t_sprite_lst **sprites)
 	while (curr->next)
 	{
 		next = curr->next;
-		if (curr->dist > next->dist)
+		if (curr->dist < next->dist)
 		{
 			ft_swap_sprite(curr, next);
 			curr = *sprites;

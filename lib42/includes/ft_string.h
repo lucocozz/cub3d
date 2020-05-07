@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 19:57:06 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/17 19:53:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/06 20:06:44 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int					ft_tolower(int c);
 int					ft_isspace(int c);
 int					ft_endswith(char *str, char *endswith);
 int					ft_startswith(char *str, char *startswith);
+char				*ft_replace_in_str(char *str, char to_replace, char new);
 
 #endif

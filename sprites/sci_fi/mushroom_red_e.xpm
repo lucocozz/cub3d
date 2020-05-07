@@ -1,0 +1,27 @@
+/* XPM */
+static char *mushroom_red_e[] = {
+/* columns rows colors chars-per-pixel */
+"16 16 5 1 ",
+"  c #C1BA9D",
+". c #D1CCB5",
+"X c #DCD8C6",
+"o c #F2F0E6",
+"O c None",
+/* pixels */
+"OOOOOOXOOOOOOOOO",
+"OOOOO o.OOOXOOOO",
+"OOOOO. .OO oXOOO",
+"OOXOOOOOOO.  OOO",
+"OXo OOOOOOOOOOOO",
+"O. .OOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOO",
+"OOOOOOOOOOOOOOOO",
+"OOOOOOOXOOOOOOOO",
+"OOOOOOXo OOXOOOO",
+"OOOOOOX  O oXOOO",
+"OOOOOOOOOO XOOOO",
+"OOOOOOOOOOOOOOOO",
+"OOOOOX OOOOOOOOO",
+"OOOO oXOOOOOOOOO",
+"OOOOO OOOOOOOOOO"
+};
