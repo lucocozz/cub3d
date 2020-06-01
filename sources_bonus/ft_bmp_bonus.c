@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_bmp.c                                           :+:      :+:    :+:   */
+/*   ft_bmp_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:26:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 20:25:29 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/07 20:26:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static t_pixel	**ft_rotate_flip_bmp(t_pixel **pixels, t_parsing *parse)
 {

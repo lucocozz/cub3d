@@ -8,15 +8,15 @@ FILE=	main.c				ft_parsing.c			ft_parsing_map.c	\
 		ft_sprite_lst.c
 
 BNS= 	main_bonus.c			ft_parsing_bonus.c		ft_parsing_map_bonus.c	\
-		ft_cub_utils_bonus.c	ft_events_bonus.c		ft_keys_bonus.c			\
-		ft_init_engine_bonus.c	ft_raycasting_bonus.c	ft_engine_bonus.c		\
+		ft_parse_utils_bonus.c	ft_events_bonus.c		ft_keys_bonus.c			\
+		ft_init_engine_bonus.c	ft_raycasting_bonus.c	ft_screen_bonus.c		\
 		ft_bmp_bonus.c			ft_keys2_bonus.c		ft_textures_bonus.c		\
 		ft_exit_cub_bonus.c		ft_sprites_bonus.c		ft_sprite_lst_bonus.c	\
-		ft_parsing_sprite_bonus.c
+		ft_parsing_two_bonus.c	ft_box.c
 
 SRCS=	$(addprefix sources/, $(FILE))
 
-BONUS=	$(addprefix souces_bonus/, $(FILE))
+BONUS=	$(addprefix sources_bonus/, $(BNS))
 
 OBJS_S=		$(SRCS:%.c=%.o)
 

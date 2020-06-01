@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_keys.c                                          :+:      :+:    :+:   */
+/*   ft_keys_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:20:41 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/29 14:33:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/29 14:36:12 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static int	ft_collision(const int nb, const char *str)
 {

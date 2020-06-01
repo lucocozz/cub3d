@@ -31,7 +31,7 @@ STR=	ft_strlen.c			ft_strdup.c			ft_strchr.c				\
 		ft_substr_free.c	ft_strscat.c		ft_strncat.c			\
 		ft_strdel.c			ft_endswith.c		ft_startswith.c			\
 		ft_strsjoin.c		ft_strchri.c		ft_substrf.c			\
-		ft_replace_in_str.c
+		ft_rep_in_str.c
 
 LST=	ft_create_elem.c	ft_list_at.c		ft_list_push_front.c	\
 		ft_list_clear.c		ft_list_last.c		ft_list_push_back.c		\

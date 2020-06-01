@@ -1,58 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parsing.c                                       :+:      :+:    :+:   */
+/*   ft_parsing_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 20:04:37 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/05/31 16:37:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 static t_data_cub	g_data_cub[N_DATA] = {
-	{"R", &ft_parse_resolution}, {"NO", &ft_parse_textures},
-	{"SO", &ft_parse_textures}, {"WE", &ft_parse_textures},
-	{"EA", &ft_parse_textures}, {"S", &ft_parse_sprites},
-	{"F", &ft_parse_color}, {"C", &ft_parse_color}
+	{"R", &ft_parse_resolution}, {"TX1", &ft_parse_textures},
+	{"TX2", &ft_parse_textures}, {"TX3", &ft_parse_textures},
+	{"TX4", &ft_parse_textures}, {"SP1", &ft_parse_sprites},
+	{"SP2", &ft_parse_sprites}, {"FLO", &ft_parse_box},
+	{"CEL", &ft_parse_box}
 };
 
 static t_hash_table	g_texture[N_TEXTURES] = {
-	{"NO"}, {"SO"}, {"WE"}, {"EA"}
+	{"TX1"}, {"TX2"}, {"TX3"}, {"TX4"}
 };
-
-static t_hash_table	g_color[N_COLORS] = {
-	{"F"}, {"C"}
-};
-
-void		ft_parse_color(t_parsing *parse, char **data)
-{
-	int		i;
-	char	**rgb;
-
-	i = 0;
-	if (ft_matrice_len(data) != 2)
-	{
-		ft_free_matrice((void **)data, 2);
-		ft_exit_parsing(parse, "Bad color format.\n");
-	}
-	while (ft_strcmp(data[0], g_color[i].hash) && i < N_COLORS)
-		i++;
-	rgb = ft_split(data[1], ',');
-	if (ft_matrice_len(rgb) != 3)
-	{
-		ft_free_matrice((void **)data, 2);
-		ft_free_matrice((void **)rgb, 3);
-		ft_exit_parsing(parse, "Bad rgb format.\n");
-	}
-	((int *)(&parse->color))[i] += ft_atoi(rgb[0]) << 16;
-	((int *)(&parse->color))[i] += ft_atoi(rgb[1]) << 8;
-	((int *)(&parse->color))[i] += ft_atoi(rgb[2]);
-	ft_free_matrice((void **)data, 2);
-	ft_free_matrice((void **)rgb, 3);
-}
 
 void		ft_parse_resolution(t_parsing *parse, char **data)
 {
@@ -85,9 +55,13 @@ void		ft_parse_textures(t_parsing *parse, char **data)
 		i++;
 	((char **)(&parse->texture))[i] = data[1];
 	if (!ft_endswith(((char **)(&parse->texture))[i], ".xpm"))
-		ft_exit_parsing(parse, "No xpm file.\n");
+		ft_exit_parsing(parse, "No xpm texture file.\n");
 	if ((fd = open(((char **)(&parse->texture))[i], O_RDONLY)) < 0)
-		ft_exit_parsing(parse, "Can't open texture.\n");
+	{
+		ft_strdel(((char **)(&parse->texture))[i]);
+		((char **)(&parse->texture))[i] = ft_strdup("./textures/missing.xpm");
+		ft_putstr("Warning: Can't open texture.\n");
+	}
 	else
 		close(fd);
 	ft_strdel(data[0]);
@@ -130,7 +104,7 @@ t_parsing	ft_parse_file(char *filename)
 	parse = ft_init_parsing();
 	while (get_next_line(fd, &line))
 	{
-		if (ft_check_parsing(parse) == 0)
+		if (ft_strcmp(line, "Map:") == 0)
 		{
 			ft_parse_map(&parse, line, fd);
 			break ;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/31 16:56:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/01 22:18:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 # include <fcntl.h>
 # include <stdio.h>
 # include <sys/stat.h>
+# include <time.h>
 
 # include "lib42.h"
-# include "cub_key.h"
+# include "cub_key_bonus.h"
 
 # if __APPLE__
 
@@ -34,24 +35,26 @@
 
 # endif
 
-# define MAP_DATA "012NEWS"
+# define MAP_DATA "01234NEWS#@"
 # define PLAYER "NEWS"
-# define SPRITES "2"
-# define COLLISION "1"
+# define WALLS "1234"
+# define SPRITES "#@"
+# define COLLISION "1234@"
 
 # define NORTH 3
 # define SOUTH 2
 # define EAST 0
 # define WEST 1
 
-# define N_DATA 8
+# define N_DATA 11
 # define N_TEXTURES 4
-# define N_SPRITES 1
-# define N_COLORS 2
+# define N_SPRITES 2
 # define N_KEYS	7
+# define N_BOX 2
 
-# define SPEED 0.075
-# define ROT 0.03
+# define SPEED 0.15
+# define ROT 0.07
+# define SHADE 4
 
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
@@ -96,10 +99,10 @@ typedef struct		s_fcoord
 
 typedef struct		s_texture_path
 {
-	char			*north;
-	char			*south;
-	char			*west;
-	char			*east;
+	char			*tx1;
+	char			*tx2;
+	char			*tx3;
+	char			*tx4;
 }					t_texture_path;
 
 typedef struct		s_texture_data
@@ -126,18 +129,47 @@ typedef struct		s_img
 
 typedef struct		s_texture_img
 {
-	t_texture_data	north;
-	t_texture_data	south;
-	t_texture_data	west;
-	t_texture_data	east;
+	t_texture_data	wall_1;
+	t_texture_data	wall_2;
+	t_texture_data	wall_3;
+	t_texture_data	wall_4;
 }					t_texture_img;
+
+typedef struct		s_box_data
+{
+	t_coord			tex;
+	t_coord			size;
+	t_img			img;
+}					t_box_data;
+
+typedef struct		s_box
+{
+	int				color;
+	int				posY;
+	float			posZ;
+	float			RowDis;
+	t_coord			cell;
+	t_fcoord		FStep;
+	t_fcoord		flo;
+	t_fcoord		Rdir0;
+	t_fcoord		Rdir1;	
+	t_box_data		floor;
+	t_box_data		celling;
+}					t_box;
+
+typedef struct		s_box_path
+{
+	char			*floor;
+	char			*celling;
+}					t_box_path;
 
 typedef struct		s_sprite_path
 {
-	char			*sprite;
+	char			*sp1;
+	char			*sp2;
 }					t_sprite_path;
 
-struct		s_sprite_lst
+struct				s_sprite_lst
 {
 	float			dist;
 	t_img			img;
@@ -162,12 +194,6 @@ typedef struct		s_sprite
 	t_sprite_lst	*data;
 }					t_sprite;
 
-typedef	struct		s_color_cub
-{
-	int				roof;
-	int				top;
-}					t_color_cub;
-
 typedef struct		s_map_parse
 {
 	int				x;
@@ -179,7 +205,7 @@ typedef struct		s_parsing
 {
 	t_coord			size;
 	t_map_parse		map;
-	t_color_cub		color;
+	t_box_path		box;
 	t_sprite_path	sprite;
 	t_texture_path	texture;
 }					t_parsing;
@@ -253,6 +279,7 @@ typedef struct		s_engine
 	unsigned int	key;
 	t_camera		cam;
 	t_map_eng		map;
+	t_box			box;
 	t_sprite		sprite;
 	t_texture_img	texture;
 }					t_engine;
@@ -266,10 +293,10 @@ typedef struct		s_garbage
 
 t_parsing			ft_init_parsing(void);
 t_parsing			ft_parse_file(char *filename);
-t_mlx				ft_init_mlx(t_parsing parse);
 t_engine			ft_init_engine(t_parsing *parse);
 void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx);
 
+void				ft_clear_img(t_mlx *mlx, t_parsing *parse);
 void				ft_display_img(t_engine *eng, t_parsing *parse, t_mlx *mlx);
 void				ft_draw(t_engine *e, t_mlx *m, t_parsing p, t_raycast *r);
 
@@ -277,6 +304,8 @@ void				ft_bmp(t_garbage garb, int save);
 
 void				ft_get_textures_img(t_engine *e, t_mlx *m, t_parsing p);
 void				ft_texturing(t_garbage g, t_texture_data *t, t_raycast *r);
+int					ft_shading(int color, float dist, float multiplier);
+void				ft_box(t_parsing parse, t_box *box, t_camera cam, t_mlx *mlx);
 
 void				ft_sprite(t_engine *eng, t_mlx *mlx, t_parsing *parse);
 void				ft_push_sprite(t_sprite_lst **sprites, t_garbage *garb,
@@ -284,11 +313,12 @@ void				ft_push_sprite(t_sprite_lst **sprites, t_garbage *garb,
 void				ft_free_sprite(t_garbage *garb);
 void				ft_sort_sprite(t_sprite_lst **sprites);
 
-int					ft_check_parsing(t_parsing parse);
+int					ft_check_parsing(t_parsing *parse);
 void				ft_free_parsing(t_parsing *parse);
 void				ft_exit_parse_map(char *s, t_parsing *c_d, t_list *lst);
 void				ft_exit_parsing(t_parsing *parse, char *str);
 
+void				ft_parse_box(t_parsing *parse, char **data);
 void				ft_parse_map(t_parsing *parse, char *line, int fd);
 void				ft_parse_color(t_parsing *parse, char **data);
 void				ft_parse_sprites(t_parsing *parse, char **data);
