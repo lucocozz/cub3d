@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 01:05:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/01 15:53:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/02 16:39:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int			ft_loop_event(t_garbage *garb)
 				g_event[i].event(garb);
 			i++;
 		}
+		ft_display_img(garb->engine, garb->parse, mlx);
 	}
 	return (1);
 }

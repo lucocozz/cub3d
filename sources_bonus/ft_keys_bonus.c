@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:20:41 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/29 14:36:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/02 16:45:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			ft_w_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x + eng->cam.dir.x * eng->moveS)], COLLISION) == 0)
 		eng->cam.pos.x += eng->cam.dir.x * eng->moveS;
-	ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
@@ -62,7 +61,6 @@ int			ft_s_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x - eng->cam.dir.x * eng->moveS)], COLLISION) == 0)
 		eng->cam.pos.x -= eng->cam.dir.x * eng->moveS;
-	ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
@@ -81,7 +79,6 @@ int			ft_a_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x - eng->cam.plane.x * eng->moveS)], COLLISION) == 0)
 		eng->cam.pos.x -= eng->cam.plane.x * eng->moveS;
-	ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
@@ -100,6 +97,5 @@ int			ft_d_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x + eng->cam.plane.x * eng->moveS)], COLLISION) == 0)
 		eng->cam.pos.x += eng->cam.plane.x * eng->moveS;
-	ft_display_img(eng, parse, mlx);
 	return (1);
 }
