@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:05:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/31 00:27:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 17:03:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		ft_exit_cub(t_garbage *garb)
 
 	i = 0;
 	ft_free_parsing(garb->parse);
-	ft_free_matrice((void**)garb->engine->map.array, garb->parse->map.y);
 	while (i < N_TEXTURES)
 	{
 		tmp = &((t_texture_data *)(&garb->engine->texture))[i++];

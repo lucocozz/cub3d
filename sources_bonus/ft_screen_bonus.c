@@ -6,11 +6,28 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:13:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/02 16:32:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 21:31:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
+
+void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
+{
+	int			x;
+	static int	bool = 0;
+	t_raycast	ray;
+
+	x = 0;
+	if (!bool++)
+		ft_get_textures_img(eng, mlx, *parse);
+	while (x < parse->size.x)
+	{
+		ray = ft_ray(eng->cam, *parse, x);
+		ft_draw(eng, mlx, *parse, &ray);
+		eng->Zbuff[x++] = ray.PWDist;
+	}
+}
 
 void		ft_draw(t_engine *eng, t_mlx *mlx, t_parsing parse, t_raycast *ray)
 {
@@ -23,7 +40,7 @@ void		ft_draw(t_engine *eng, t_mlx *mlx, t_parsing parse, t_raycast *ray)
 	ft_texturing((t_garbage){&parse, mlx, eng}, texture, ray);
 }
 
-void		ft_clear_img(t_mlx *mlx, t_parsing *parse)
+void		ft_clear_screen(t_mlx *mlx, t_parsing *parse)
 {
 	t_coord		axe;
 	void		*ptr;
@@ -47,10 +64,15 @@ void		ft_clear_img(t_mlx *mlx, t_parsing *parse)
 	mlx_destroy_image(mlx->ptr, ptr);
 }
 
-void		ft_display_img(t_engine *eng, t_parsing *parse, t_mlx *mlx)
+void		ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 {
 	ft_box(*parse, &eng->box, eng->cam, mlx);
 	ft_raycast(parse, eng, mlx);
 	ft_sprite(eng, mlx, parse);
+}
+
+void		ft_display_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
+{
+	ft_get_screen(eng, parse, mlx);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 }

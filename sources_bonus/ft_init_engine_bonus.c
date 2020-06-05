@@ -6,107 +6,57 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:55:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 17:42:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 19:18:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-static int	**ft_malloc_map(t_parsing *parse)
+static void	ft_pos_cam(t_camera *cam, t_coord dir, t_fcoord plane)
 {
-	int	i;
-	int	**array;
-
-	i = 0;
-	if ((array = malloc(sizeof(int*) * parse->map.y)) == NULL)
-	{
-		ft_free_parsing(parse);
-		ft_exit_error("Engine create map axe y\n");
-	}
-	while (i < parse->map.y)
-	{
-		if ((array[i] = malloc(sizeof(int) * parse->map.x)) == NULL)
-		{
-			ft_free_parsing(parse);
-			ft_free_matrice((void**)array, i);
-			ft_exit_error("Engine create map axe x\n");
-		}
-		i++;
-	}
-	return (array);
+	cam->dir.x = dir.x;
+	cam->dir.y = dir.y;
+	cam->plane.x = plane.x;
+	cam->plane.y = plane.y;
 }
 
-static void	ft_pos_cam(t_engine *engine, int dy, float px, float py)
+static void	ft_set_cam(t_map_parse *map, t_camera *cam, int x, int y)
 {
-	engine->cam.dir.y = dy;
-	engine->cam.plane.x = px;
-	engine->cam.plane.y = py;
-}
-
-static void	ft_set_cam(t_parsing *parse, t_engine *engine, int x, int y)
-{
-	if (parse->map.array[y][x] == 'N')
-	{
-		engine->cam.dir.x = 0;
-		ft_pos_cam(engine, -1, 0.66, 0.0);
-	}
-	else if (parse->map.array[y][x] == 'E')
-	{
-		engine->cam.dir.x = 1;
-		ft_pos_cam(engine, 0, 0.0, 0.66);
-	}
-	else if (parse->map.array[y][x] == 'W')
-	{
-		engine->cam.dir.x = -1;
-		ft_pos_cam(engine, 0, 0.0, -0.66);
-	}
-	else if (parse->map.array[y][x] == 'S')
-	{
-		engine->cam.dir.x = 0;
-		ft_pos_cam(engine, 1, -0.66, 0.0);
-	}
-	engine->cam.pos.x = x + 0.5;
-	engine->cam.pos.y = y + 0.5;
-	engine->map.array[y][x] = 0;
-}
-
-static void	ft_data(t_parsing *parse, t_engine *engine)
-{
-	engine->sprite.data = NULL;
-	engine->moveS = SPEED;
-	engine->rotS = ROT;
-	engine->key = 0;
-	if ((engine->Zbuff = malloc(sizeof(float) * parse->size.x)) == NULL)
-	{
-		ft_free_parsing(parse);
-		ft_free_matrice((void**)engine->map.array, parse->size.y);
-		ft_exit_error("Init engine error\n");
-	}
+	if (map->array[y][x] == 'N')
+		ft_pos_cam(cam, (t_coord){0, -1}, (t_fcoord){0.66, 0.0});
+	else if (map->array[y][x] == 'E')
+		ft_pos_cam(cam, (t_coord){1, 0}, (t_fcoord){0.0, 0.66});
+	else if (map->array[y][x] == 'W')
+		ft_pos_cam(cam,(t_coord){-1, 0}, (t_fcoord){0.0, -0.66});
+	else if (map->array[y][x] == 'S')
+		ft_pos_cam(cam, (t_coord){0, 1}, (t_fcoord){-0.66, 0.0});
+	cam->pos.x = x + 0.5;
+	cam->pos.y = y + 0.5;
+	map->array[y][x] = '0';
 }
 
 t_engine	ft_init_engine(t_parsing *parse)
 {
-	int			x;
-	int			y;
+	t_coord		axe;
 	t_engine	engine;
 
-	y = 0;
-	ft_data(parse, &engine);
-	engine.map.array = ft_malloc_map(parse);
-	while (y < parse->map.y)
+	axe.y = 0;
+	while (axe.y < parse->map.y)
 	{
-		x = 0;
-		while (x < parse->map.x)
+		axe.x = 0;
+		while (axe.x < parse->map.x)
 		{
-			if (ft_strchr(PLAYER, parse->map.array[y][x]))
-				ft_set_cam(parse, &engine, x, y);
-			else if (ft_isdigit(parse->map.array[y][x]))
-				engine.map.array[y][x] = parse->map.array[y][x] - '0';
-			else
-				engine.map.array[y][x] = (int)parse->map.array[y][x];
-			x++;
+			if (ft_strchr(PLAYER, parse->map.array[axe.y][axe.x]))
+				ft_set_cam(&parse->map, &engine.cam, axe.x, axe.y);
+			axe.x++;
 		}
-		y++;
+		axe.y++;
 	}
+	engine.sprite.data = NULL;
+	engine.moveS = SPEED;
+	engine.rotS = ROT;
+	engine.key = 0;
+	if ((engine.Zbuff = malloc(sizeof(float) * parse->size.x)) == NULL)
+		ft_exit_parsing(parse, "Init engine error\n");
 	return (engine);
 }

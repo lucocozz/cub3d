@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 14:00:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/02 14:16:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 21:31:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ t_parsing	ft_init_parsing(void);
 t_parsing	ft_parse_file(char *filename);
 t_engine	ft_init_engine(t_parsing *parse);
 void		ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx);
+t_raycast	ft_ray(t_camera cam, t_parsing parse, int x);
 
-void		ft_clear_img(t_mlx *mlx, t_parsing *parse);
-void		ft_display_img(t_engine *eng, t_parsing *parse, t_mlx *mlx);
+void		ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx);
+void		ft_clear_screen(t_mlx *mlx, t_parsing *parse);
+void		ft_display_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx);
 void		ft_draw(t_engine *e, t_mlx *m, t_parsing p, t_raycast *r);
 
-void		ft_bmp(t_garbage garb, int save);
+void		ft_bmp(t_parsing *parse, t_mlx *mlx);
 
 void		ft_get_textures_img(t_engine *e, t_mlx *m, t_parsing p);
 void		ft_texturing(t_garbage g, t_texture_data *t, t_raycast *r);

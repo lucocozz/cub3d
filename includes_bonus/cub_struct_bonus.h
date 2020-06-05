@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 14:11:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/02 14:13:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 16:59:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct		s_texture_path
 
 typedef struct		s_texture_data
 {
-	int				num;
 	void			*ptr;
 	int				*img;
 	int				width;
@@ -194,11 +193,6 @@ typedef struct		s_mlx
 	t_img			img;
 }					t_mlx;
 
-typedef struct		s_map_eng
-{
-	int				**array;
-}					t_map_eng;
-
 typedef struct		s_raycast
 {
 	int				hit;
@@ -231,7 +225,6 @@ typedef struct		s_engine
 	float			*Zbuff;
 	unsigned int	key;
 	t_camera		cam;
-	t_map_eng		map;
 	t_box			box;
 	t_sprite		sprite;
 	t_texture_img	texture;

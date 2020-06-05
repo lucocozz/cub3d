@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:26:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 20:26:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 20:07:12 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void		ft_put_pixels(int fd, t_parsing *parse, t_mlx *mlx, t_bmp bmp)
 	ft_free_matrice((void**)pixels_rot, parse->size.y);
 }
 
-static void		ft_img_to_bmp(t_parsing *parse, t_mlx *mlx)
+void		ft_bmp(t_parsing *parse, t_mlx *mlx)
 {
 	int						fd;
 	t_bmp					bmp;
@@ -100,25 +100,4 @@ static void		ft_img_to_bmp(t_parsing *parse, t_mlx *mlx)
 	write(fd, header, 54);
 	ft_put_pixels(fd, parse, mlx, bmp);
 	close(fd);
-}
-
-void			ft_bmp(t_garbage garb, int save)
-{
-	t_mlx		*mlx;
-	t_parsing	*parse;
-
-	mlx = garb.mlx;
-	parse = garb.parse;
-	if (save)
-	{
-		mlx->win = NULL;
-		ft_img_to_bmp(parse, mlx);
-		ft_exit_cub((void*)&garb);
-	}
-	else
-	{
-		mlx->win = mlx_new_window(mlx->ptr, parse->size.x, parse->size.y,
-		"Cub3D");
-		mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
-	}
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 14:05:15 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/02 16:55:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/06/04 21:40:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@
 
 # define SPEED 0.15
 # define ROT 0.1
-# define SHADE 4
+# define SHADE 2
 
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
