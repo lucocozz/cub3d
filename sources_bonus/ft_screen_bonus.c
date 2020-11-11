@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:13:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 21:31:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2020/11/11 21:40:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,6 @@ void		ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 void		ft_display_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 {
 	ft_get_screen(eng, parse, mlx);
+	ft_filter_image(mlx, *parse, &ft_grayscale_pixel);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 }

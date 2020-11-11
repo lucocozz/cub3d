@@ -12,7 +12,7 @@ BNS= 	main_bonus.c			ft_parsing_bonus.c		ft_parsing_map_bonus.c	\
 		ft_init_engine_bonus.c	ft_raycasting_bonus.c	ft_screen_bonus.c		\
 		ft_bmp_bonus.c			ft_keys2_bonus.c		ft_textures_bonus.c		\
 		ft_exit_cub_bonus.c		ft_sprites_bonus.c		ft_sprite_lst_bonus.c	\
-		ft_parsing_two_bonus.c	ft_box.c
+		ft_parsing_two_bonus.c	ft_box.c				ft_pixel_bonus.c
 
 SRCS=	$(addprefix sources/, $(FILE))
 
@@ -29,7 +29,7 @@ INCL=		-I includes/
 INCL_BNS=	-I includes_bonus/
 
 CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I /usr/local/include	\
--L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11	-lm -lbsd #-g3 -fsanitize=address
+-L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11	-lm #-g3 -fsanitize=address
 
 all: $(NAME)
 
