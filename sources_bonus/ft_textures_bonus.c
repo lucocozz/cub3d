@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 05:22:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 16:57:36 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:57:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_parsing *parse, t_mlx *mlx)
 		if (ray->side == EAST || ray->side == WEST)
 			ray->color = (ray->color >> 1) & 8355711;
 		mlx->img.data[y * parse->size.x + ray->col] = ft_shading(ray->color,
-		ray->PWDist, SHADE);
+		ray->pw_dist, SHADE);
 		y++;
 	}
 }
@@ -71,9 +71,9 @@ t_raycast *ray)
 
 	eng = garb.engine;
 	if (ray->side == EAST || ray->side == WEST)
-		texture->wall_x = eng->cam.pos.y + ray->PWDist * ray->dir.y;
+		texture->wall_x = eng->cam.pos.y + ray->pw_dist * ray->dir.y;
 	else
-		texture->wall_x = eng->cam.pos.x + ray->PWDist * ray->dir.x;
+		texture->wall_x = eng->cam.pos.x + ray->pw_dist * ray->dir.x;
 	texture->wall_x -= floor(texture->wall_x);
 	texture->coord.x = (int)(texture->wall_x * (float)texture->width);
 	if ((ray->side == EAST || ray->side == WEST) && ray->dir.x > 0)

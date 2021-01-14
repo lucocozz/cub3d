@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/08 12:26:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/02 18:53:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:06:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ t_sprite_lst sprite)
 	while (++axe.x < eng->sprite.end.x)
 	{
 		eng->sprite.tex.x = (int)(256 * (axe.x - (-eng->sprite.size.x / 2
-			+ eng->sprite.screenX)) * sprite.size.x / eng->sprite.size.x / 256);
+		+ eng->sprite.screen_x)) * sprite.size.x / eng->sprite.size.x / 256);
 		if (eng->sprite.transf.y > 0 && axe.x > 0 && axe.x < screen.x
-		&& eng->sprite.transf.y < eng->Zbuff[axe.x])
+		&& eng->sprite.transf.y < eng->z_buff[axe.x])
 		{
 			axe.y = eng->sprite.start.y - 1;
 			while (++axe.y < eng->sprite.end.y)
@@ -71,12 +71,12 @@ t_sprite_lst *sprite)
 {
 	data->coord.x = sprite->coord.x - cam.pos.x;
 	data->coord.y = sprite->coord.y - cam.pos.y;
-	data->invDet = 1.0 / (cam.plane.x * cam.dir.y - cam.dir.x * cam.plane.y);
-	data->transf.x = data->invDet * (cam.dir.y * data->coord.x - cam.dir.x
+	data->inv_det = 1.0 / (cam.plane.x * cam.dir.y - cam.dir.x * cam.plane.y);
+	data->transf.x = data->inv_det * (cam.dir.y * data->coord.x - cam.dir.x
 		* data->coord.y);
-	data->transf.y = data->invDet * (-cam.plane.y * data->coord.x + cam.plane.x
+	data->transf.y = data->inv_det * (-cam.plane.y * data->coord.x + cam.plane.x
 		* data->coord.y);
-	data->screenX = (int)((screen.x / 2) * (1 + data->transf.x
+	data->screen_x = (int)((screen.x / 2) * (1 + data->transf.x
 		/ data->transf.y));
 	data->size.y = abs((int)(screen.y / (data->transf.y)));
 	data->start.y = -data->size.y / 2 + screen.y / 2;
@@ -86,10 +86,10 @@ t_sprite_lst *sprite)
 	if (data->end.y >= screen.y)
 		data->end.y = screen.y - 1;
 	data->size.x = abs((int)(screen.y / (data->transf.y)));
-	data->start.x = -data->size.x / 2 + data->screenX;
+	data->start.x = -data->size.x / 2 + data->screen_x;
 	if (data->start.x < 0)
 		data->start.x = 0;
-	data->end.x = data->size.x / 2 + data->screenX;
+	data->end.x = data->size.x / 2 + data->screen_x;
 	if (data->end.x >= screen.x)
 		data->end.x = screen.x - 1;
 }

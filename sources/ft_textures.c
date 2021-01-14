@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 05:22:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/04/16 03:03:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:39:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,9 @@ t_raycast *ray)
 	eng = garb.engine;
 	texture->num = eng->map.array[ray->map.y][ray->map.x] - 1;
 	if (ray->side == EAST || ray->side == WEST)
-		texture->wall_x = eng->cam.pos.y + ray->PWDist * ray->dir.y;
+		texture->wall_x = eng->cam.pos.y + ray->pw_dist * ray->dir.y;
 	else
-		texture->wall_x = eng->cam.pos.x + ray->PWDist * ray->dir.x;
+		texture->wall_x = eng->cam.pos.x + ray->pw_dist * ray->dir.x;
 	texture->wall_x -= floor(texture->wall_x);
 	texture->coord.x = (int)(texture->wall_x * (float)texture->width);
 	if ((ray->side == EAST || ray->side == WEST) && ray->dir.x > 0)

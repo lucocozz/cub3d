@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:05:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 17:03:26 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:53:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		ft_exit_cub(t_garbage *garb)
 		mlx_destroy_image(garb->mlx->ptr, garb->mlx->img.ptr);
 	if (garb->mlx->win)
 		mlx_destroy_window(garb->mlx->ptr, garb->mlx->win);
-	ft_memdel((void**)&garb->engine->Zbuff);
+	ft_memdel((void**)&garb->engine->z_buff);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
@@ -42,7 +42,7 @@ void	ft_exit_parsing(t_parsing *parse, char *str)
 	ft_exit_error(str);
 }
 
-void			ft_exit_parse_map(char *s, t_parsing *parse, t_list *lst)
+void	ft_exit_parse_map(char *s, t_parsing *parse, t_list *lst)
 {
 	ft_list_clear(lst, &free);
 	ft_free_parsing(parse);

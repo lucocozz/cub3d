@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:18:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 21:13:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:34:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int				main(int ac, char **av)
 	t_mlx			mlx;
 	t_engine		engine;
 	t_parsing		parse;
-	
+
 	save = ft_check_arg(ac, av);
 	parse = ft_parse_file(av[1]);
 	if (ft_check_parsing(&parse) == -1)

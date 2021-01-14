@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/31 16:56:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:43:37 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@
 # define RED 0x00FF0000
 # define GREEN 0x0000FF00
 # define BLUE 0x000000FF
-
-typedef struct		s_sprite_lst t_sprite_lst;
 
 typedef struct		s_pixel
 {
@@ -137,22 +135,22 @@ typedef struct		s_sprite_path
 	char			*sprite;
 }					t_sprite_path;
 
-struct		s_sprite_lst
+typedef struct		s_sprite_lst
 {
-	float			dist;
-	t_img			img;
-	t_coord			size;
-	t_fcoord		coord;
-	t_sprite_lst	*next;
-};
+	float				dist;
+	t_img				img;
+	t_coord				size;
+	t_fcoord			coord;
+	struct s_sprite_lst	*next;
+}					t_sprite_lst;
 
 typedef struct		s_sprite
 {
 	int				d;
 	int				nb;
 	int				color;
-	int				screenX;
-	float			invDet;
+	int				screen_x;
+	float			inv_det;
 	t_coord			tex;
 	t_coord			start;
 	t_coord			end;
@@ -229,13 +227,13 @@ typedef struct		s_raycast
 	int				start;
 	int				color;
 	int				line_h;
-	float			PWDist;
+	float			pw_dist;
 	t_coord			map;
 	t_coord			step;
 	t_fcoord		cam;
 	t_fcoord		dir;
-	t_fcoord		dDist;
-	t_fcoord		sDist;
+	t_fcoord		d_dist;
+	t_fcoord		s_dist;
 }					t_raycast;
 
 typedef struct		s_camera
@@ -247,9 +245,9 @@ typedef struct		s_camera
 
 typedef struct		s_engine
 {
-	float			rotS;
-	float			moveS;
-	float			*Zbuff;
+	float			rot_s;
+	float			move_s;
+	float			*z_buff;
 	unsigned int	key;
 	t_camera		cam;
 	t_map_eng		map;

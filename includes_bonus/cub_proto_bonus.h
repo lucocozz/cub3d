@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 14:00:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/11/11 21:22:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:23:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int			ft_right_key(t_garbage *garb);
 void		ft_filter_image(t_mlx *mlx, t_parsing parse, int (*ft)(int));
 int			ft_invert_pixel_color(int pixel);
 int			ft_grayscale_pixel(int pixel);
+void		ft_draw_reticle(t_mlx *mlx, t_parsing parse);
 
 #endif

@@ -6,14 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 14:11:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 16:59:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:04:44 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB_STRUCT_BONUS_H
 # define CUB_STRUCT_BONUS_H
-
-typedef struct		s_sprite_lst t_sprite_lst;
 
 typedef struct		s_pixel
 {
@@ -97,14 +95,14 @@ typedef struct		s_box_data
 typedef struct		s_box
 {
 	int				color;
-	int				posY;
-	float			posZ;
-	float			RowDis;
+	int				pos_y;
+	float			pos_z;
+	float			row_dis;
 	t_coord			cell;
-	t_fcoord		FStep;
+	t_fcoord		f_step;
 	t_fcoord		flo;
-	t_fcoord		Rdir0;
-	t_fcoord		Rdir1;	
+	t_fcoord		r_dir0;
+	t_fcoord		r_dir1;
 	t_box_data		floor;
 	t_box_data		celling;
 }					t_box;
@@ -121,22 +119,22 @@ typedef struct		s_sprite_path
 	char			*sp2;
 }					t_sprite_path;
 
-struct				s_sprite_lst
+typedef struct		s_sprite_lst
 {
-	float			dist;
-	t_img			img;
-	t_coord			size;
-	t_fcoord		coord;
-	t_sprite_lst	*next;
-};
+	float				dist;
+	t_img				img;
+	t_coord				size;
+	t_fcoord			coord;
+	struct s_sprite_lst	*next;
+}					t_sprite_lst;
 
 typedef struct		s_sprite
 {
 	int				d;
 	int				nb;
 	int				color;
-	int				screenX;
-	float			invDet;
+	int				screen_x;
+	float			inv_det;
 	t_coord			tex;
 	t_coord			start;
 	t_coord			end;
@@ -202,13 +200,13 @@ typedef struct		s_raycast
 	int				start;
 	int				color;
 	int				line_h;
-	float			PWDist;
+	float			pw_dist;
 	t_coord			map;
 	t_coord			step;
 	t_fcoord		cam;
 	t_fcoord		dir;
-	t_fcoord		dDist;
-	t_fcoord		sDist;
+	t_fcoord		d_dist;
+	t_fcoord		s_dist;
 }					t_raycast;
 
 typedef struct		s_camera
@@ -220,9 +218,9 @@ typedef struct		s_camera
 
 typedef struct		s_engine
 {
-	float			rotS;
-	float			moveS;
-	float			*Zbuff;
+	float			rot_s;
+	float			move_s;
+	float			*z_buff;
 	unsigned int	key;
 	t_camera		cam;
 	t_box			box;

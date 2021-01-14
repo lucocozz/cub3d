@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 21:38:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/01 15:25:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:30:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char		*ft_missing(int type)
 int				ft_check_parsing(t_parsing *parse)
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < N_BOX)
 		if (((char **)(&parse->box))[i] == NULL)

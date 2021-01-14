@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/09 04:40:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/30 19:11:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:48:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_parse_sprites(t_parsing *parse, char **data)
 	free(data);
 }
 
-void		ft_parse_box(t_parsing *parse, char **data)
+void	ft_parse_box(t_parsing *parse, char **data)
 {
 	int	i;
 	int	fd;

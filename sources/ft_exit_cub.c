@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:05:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 04:21:52 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:05:11 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		ft_exit_cub(t_garbage *garb)
 		mlx_destroy_image(garb->mlx->ptr, garb->mlx->img.ptr);
 	if (garb->mlx->win)
 		mlx_destroy_window(garb->mlx->ptr, garb->mlx->win);
-	ft_memdel((void**)&garb->engine->Zbuff);
+	ft_memdel((void**)&garb->engine->z_buff);
 	exit(EXIT_SUCCESS);
 	return (0);
 }

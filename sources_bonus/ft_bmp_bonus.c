@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:26:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 20:07:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:34:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static void		ft_put_pixels(int fd, t_parsing *parse, t_mlx *mlx, t_bmp bmp)
 	ft_free_matrice((void**)pixels_rot, parse->size.y);
 }
 
-void		ft_bmp(t_parsing *parse, t_mlx *mlx)
+void			ft_bmp(t_parsing *parse, t_mlx *mlx)
 {
 	int						fd;
 	t_bmp					bmp;

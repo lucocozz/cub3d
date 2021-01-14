@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/28 17:23:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/03 00:31:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:37:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ static t_raycast	ft_init_ray(t_engine *eng, t_parsing *parse, int col)
 	ray.col = col;
 	ray.hit = 0;
 	ray.cam.y = 0;
-	ray.sDist.x = 0;
-	ray.sDist.y = 0;
+	ray.s_dist.x = 0;
+	ray.s_dist.y = 0;
 	ray.cam.x = 2 * ray.col / (float)parse->size.x - 1;
 	ray.dir.x = eng->cam.dir.x + eng->cam.plane.x * ray.cam.x;
 	ray.dir.y = eng->cam.dir.y + eng->cam.plane.y * ray.cam.x;
 	ray.map.x = (int)eng->cam.pos.x;
 	ray.map.y = (int)eng->cam.pos.y;
-	ray.dDist.x = fabsf(1 / ray.dir.x);
-	ray.dDist.y = fabsf(1 / ray.dir.y);
+	ray.d_dist.x = fabsf(1 / ray.dir.x);
+	ray.d_dist.y = fabsf(1 / ray.dir.y);
 	return (ray);
 }
 
@@ -35,15 +35,15 @@ static void			ft_ray_hit(t_engine *eng, t_raycast *ray)
 {
 	while (ray->hit == 0)
 	{
-		if (ray->sDist.x < ray->sDist.y)
+		if (ray->s_dist.x < ray->s_dist.y)
 		{
-			ray->sDist.x += ray->dDist.x;
+			ray->s_dist.x += ray->d_dist.x;
 			ray->map.x += ray->step.x;
 			ray->side = (ray->step.x == 1 ? EAST : WEST);
 		}
 		else
 		{
-			ray->sDist.y += ray->dDist.y;
+			ray->s_dist.y += ray->d_dist.y;
 			ray->map.y += ray->step.y;
 			ray->side = (ray->step.y == 1 ? SOUTH : NORTH);
 		}
@@ -57,35 +57,35 @@ static void			ft_ray_step(t_engine *eng, t_raycast *ray)
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -1;
-		ray->sDist.x = (eng->cam.pos.x - ray->map.x) * ray->dDist.x;
+		ray->s_dist.x = (eng->cam.pos.x - ray->map.x) * ray->d_dist.x;
 	}
 	else
 	{
 		ray->step.x = 1;
-		ray->sDist.x = (ray->map.x + 1.0 - eng->cam.pos.x) * ray->dDist.x;
+		ray->s_dist.x = (ray->map.x + 1.0 - eng->cam.pos.x) * ray->d_dist.x;
 	}
 	if (ray->dir.y < 0)
 	{
 		ray->step.y = -1;
-		ray->sDist.y = (eng->cam.pos.y - ray->map.y) * ray->dDist.y;
+		ray->s_dist.y = (eng->cam.pos.y - ray->map.y) * ray->d_dist.y;
 	}
 	else
 	{
 		ray->step.y = 1;
-		ray->sDist.y = (ray->map.y + 1.0 - eng->cam.pos.y)
-		* ray->dDist.y;
+		ray->s_dist.y = (ray->map.y + 1.0 - eng->cam.pos.y)
+		* ray->d_dist.y;
 	}
 }
 
 static void			ft_p_h_ray(t_parsing parse, t_raycast *ray, t_engine *eng)
 {
 	if (ray->side == EAST || ray->side == WEST)
-		ray->PWDist = (ray->map.x - eng->cam.pos.x
+		ray->pw_dist = (ray->map.x - eng->cam.pos.x
 		+ (1 - ray->step.x) / 2) / ray->dir.x;
 	else
-		ray->PWDist = (ray->map.y - eng->cam.pos.y
+		ray->pw_dist = (ray->map.y - eng->cam.pos.y
 		+ (1 - ray->step.y) / 2) / ray->dir.y;
-	ray->line_h = (int)(parse.size.y / ray->PWDist);
+	ray->line_h = (int)(parse.size.y / ray->pw_dist);
 	ray->start = -ray->line_h / 2 + parse.size.y / 2;
 	if (ray->start < 0)
 		ray->start = 0;
@@ -106,6 +106,6 @@ void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
 		ft_ray_hit(eng, &ray);
 		ft_p_h_ray(*parse, &ray, eng);
 		ft_draw(eng, mlx, *parse, &ray);
-		eng->Zbuff[ray.col++] = ray.PWDist;
+		eng->z_buff[ray.col++] = ray.pw_dist;
 	}
 }

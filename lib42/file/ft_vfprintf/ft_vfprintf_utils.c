@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/31 11:41:25 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/03 16:34:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:46:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_printf	ft_init_parse(void)
 	return (data);
 }
 
-void	ft_print_buffer(t_buffer *buffer)
+void		ft_print_buffer(t_buffer *buffer)
 {
 	write(buffer->fd, buffer->data, buffer->i);
 	buffer->len += buffer->i;
@@ -32,20 +32,20 @@ void	ft_print_buffer(t_buffer *buffer)
 	buffer->i = 0;
 }
 
-void	ft_insert_in_buffer(t_buffer *buffer, char c)
+void		ft_insert_in_buffer(t_buffer *buffer, char c)
 {
 	buffer->data[buffer->i++] = c;
 	if (buffer->i == VFPRINTF_BUFFER_SIZE - 1)
 		ft_print_buffer(buffer);
 }
 
-void	ft_insert_format(t_buffer *buffer, t_printf *data, char c)
+void		ft_insert_format(t_buffer *buffer, t_printf *data, char c)
 {
 	ft_insert_in_buffer(buffer, c);
 	data->width--;
 }
 
-void	ft_insert_str(t_buffer *buffer, t_printf *data, char *str)
+void		ft_insert_str(t_buffer *buffer, t_printf *data, char *str)
 {
 	int	i;
 

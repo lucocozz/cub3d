@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/05/30 20:36:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/02 00:34:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 17:11:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_coord axe)
 		+ box->floor.tex.x];
 	box->color = (box->color >> 1) & 8355711;
 	mlx->img.data[axe.y * parse.size.x + axe.x] = ft_shading(box->color,
-		box->RowDis, SHADE);
+		box->row_dis, SHADE);
 }
 
 static void	ft_display_celling(t_parsing parse, t_box *box, t_mlx *mlx,
@@ -53,24 +53,25 @@ t_coord axe)
 	box->color = box->celling.img.data[box->celling.size.x * box->celling.tex.y
 		+ box->celling.tex.x];
 	box->color = (box->color >> 1) & 8355711;
-	mlx->img.data[(parse.size.y - axe.y - 1) * parse.size.x + axe.x]
-		= ft_shading(box->color, box->RowDis, SHADE);
+	mlx->img.data[(parse.size.y - axe.y - 1) * parse.size.x + axe.x] =
+		ft_shading(box->color, box->row_dis, SHADE);
 }
-
 
 static void	ft_raycast_box(t_parsing parse, t_box *box, t_camera *cam, int y)
 {
-	box->Rdir0.x = cam->dir.x - cam->plane.x;
-	box->Rdir0.y = cam->dir.y - cam->plane.y;
-	box->Rdir1.x = cam->dir.x + cam->plane.x;
-	box->Rdir1.y = cam->dir.y + cam->plane.y;
-	box->posY = y - parse.size.y / 2;
-	box->posZ = 0.5 * parse.size.y;
-	box->RowDis = box->posZ / box->posY;
-	box->FStep.x = box->RowDis * (box->Rdir1.x - box->Rdir0.x) / parse.size.x;
-	box->FStep.y = box->RowDis * (box->Rdir1.y - box->Rdir0.y) / parse.size.x;
-	box->flo.x = cam->pos.x + box->RowDis * box->Rdir0.x;
-	box->flo.y = cam->pos.y + box->RowDis * box->Rdir0.y;
+	box->r_dir0.x = cam->dir.x - cam->plane.x;
+	box->r_dir0.y = cam->dir.y - cam->plane.y;
+	box->r_dir1.x = cam->dir.x + cam->plane.x;
+	box->r_dir1.y = cam->dir.y + cam->plane.y;
+	box->pos_y = y - parse.size.y / 2;
+	box->pos_z = 0.5 * parse.size.y;
+	box->row_dis = box->pos_z / box->pos_y;
+	box->f_step.x = box->row_dis * (box->r_dir1.x - box->r_dir0.x)
+		/ parse.size.x;
+	box->f_step.y = box->row_dis * (box->r_dir1.y - box->r_dir0.y)
+		/ parse.size.x;
+	box->flo.x = cam->pos.x + box->row_dis * box->r_dir0.x;
+	box->flo.y = cam->pos.y + box->row_dis * box->r_dir0.y;
 }
 
 void		ft_box(t_parsing parse, t_box *box, t_camera cam, t_mlx *mlx)
@@ -90,8 +91,8 @@ void		ft_box(t_parsing parse, t_box *box, t_camera cam, t_mlx *mlx)
 			axe.x++;
 			box->cell.x = (int)box->flo.x;
 			box->cell.y = (int)box->flo.y;
-			box->flo.x += box->FStep.x;
-			box->flo.y += box->FStep.y;
+			box->flo.x += box->f_step.x;
+			box->flo.y += box->f_step.y;
 			ft_display_floor(parse, box, mlx, axe);
 			ft_display_celling(parse, box, mlx, axe);
 		}

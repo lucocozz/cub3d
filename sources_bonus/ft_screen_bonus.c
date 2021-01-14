@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 16:13:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/11/11 21:40:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:56:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d_bonus.h"
 
-void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
+void		ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
 {
 	int			x;
 	static int	bool = 0;
@@ -25,7 +25,7 @@ void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
 	{
 		ray = ft_ray(eng->cam, *parse, x);
 		ft_draw(eng, mlx, *parse, &ray);
-		eng->Zbuff[x++] = ray.PWDist;
+		eng->z_buff[x++] = ray.pw_dist;
 	}
 }
 
@@ -74,6 +74,6 @@ void		ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 void		ft_display_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 {
 	ft_get_screen(eng, parse, mlx);
-	ft_filter_image(mlx, *parse, &ft_grayscale_pixel);
+	ft_draw_reticle(mlx, *parse);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 17:33:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/03/03 16:32:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:45:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef struct	s_buffer
 }				t_buffer;
 
 int				ft_vfprintf(int fd, const char *format, va_list ap);
-t_printf			ft_init_parse(void);
+t_printf		ft_init_parse(void);
 void			ft_print_buffer(t_buffer *buffer);
 void			ft_insert_in_buffer(t_buffer *buffer, char c);
 void			ft_insert_str(t_buffer *buffer, t_printf *data, char *str);

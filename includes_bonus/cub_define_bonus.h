@@ -6,12 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/06/02 14:05:15 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 21:40:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:58:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB_DEFINE_BONNUS_H
-# define CUB_DEFINE_BONNUS_H
+#ifndef CUB_DEFINE_BONUS_H
+# define CUB_DEFINE_BONUS_H
 
 # if __APPLE__
 
@@ -30,6 +30,7 @@
 # define WALLS "1234"
 # define SPRITES "#@"
 # define COLLISION "1234@"
+# define DIAMETER 10
 
 # define NORTH 3
 # define SOUTH 2

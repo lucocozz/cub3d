@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/27 15:55:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/03 23:26:44 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 15:35:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,10 @@ static void	ft_set_cam(t_parsing *parse, t_engine *engine, int x, int y)
 static void	ft_data(t_parsing *parse, t_engine *engine)
 {
 	engine->sprite.data = NULL;
-	engine->moveS = SPEED;
-	engine->rotS = ROT;
+	engine->move_s = SPEED;
+	engine->rot_s = ROT;
 	engine->key = 0;
-	if ((engine->Zbuff = malloc(sizeof(float) * parse->size.x)) == NULL)
+	if ((engine->z_buff = malloc(sizeof(float) * parse->size.x)) == NULL)
 	{
 		ft_free_parsing(parse);
 		ft_free_matrice((void**)engine->map.array, parse->size.y);

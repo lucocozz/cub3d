@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:20:41 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/06/04 16:36:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/01/14 16:54:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ int			ft_w_key(t_garbage *garb)
 
 	eng = garb->engine;
 	parse = garb->parse;
-	next = eng->cam.pos.y + eng->cam.dir.y * eng->moveS;
+	next = eng->cam.pos.y + eng->cam.dir.y * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)next][(int)eng->cam.pos.x])
 	== -1)
 		eng->cam.pos.y = next;
-	next = eng->cam.pos.x + eng->cam.dir.x * eng->moveS;
+	next = eng->cam.pos.x + eng->cam.dir.x * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)eng->cam.pos.y][(int)next])
 	== -1)
 		eng->cam.pos.x = next;
@@ -39,11 +39,11 @@ int			ft_s_key(t_garbage *garb)
 
 	eng = garb->engine;
 	parse = garb->parse;
-	next = eng->cam.pos.y - eng->cam.dir.y * eng->moveS;
+	next = eng->cam.pos.y - eng->cam.dir.y * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)next][(int)eng->cam.pos.x])
 	== -1)
 		eng->cam.pos.y = next;
-	next = eng->cam.pos.x - eng->cam.dir.x * eng->moveS;
+	next = eng->cam.pos.x - eng->cam.dir.x * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)eng->cam.pos.y][(int)next])
 	== -1)
 		eng->cam.pos.x = next;
@@ -58,11 +58,11 @@ int			ft_a_key(t_garbage *garb)
 
 	eng = garb->engine;
 	parse = garb->parse;
-	next = eng->cam.pos.y - eng->cam.plane.y * eng->moveS;
+	next = eng->cam.pos.y - eng->cam.plane.y * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)next][(int)eng->cam.pos.x])
 	== -1)
 		eng->cam.pos.y = next;
-	next = eng->cam.pos.x - eng->cam.plane.x * eng->moveS;
+	next = eng->cam.pos.x - eng->cam.plane.x * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)eng->cam.pos.y][(int)next])
 	== -1)
 		eng->cam.pos.x = next;
@@ -77,11 +77,11 @@ int			ft_d_key(t_garbage *garb)
 
 	eng = garb->engine;
 	parse = garb->parse;
-	next = eng->cam.pos.y + eng->cam.plane.y * eng->moveS;
+	next = eng->cam.pos.y + eng->cam.plane.y * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)next][(int)eng->cam.pos.x])
 	== -1)
 		eng->cam.pos.y = next;
-	next = eng->cam.pos.x + eng->cam.plane.x * eng->moveS;
+	next = eng->cam.pos.x + eng->cam.plane.x * eng->move_s;
 	if (ft_strchri(COLLISION, parse->map.array[(int)eng->cam.pos.y][(int)next])
 	== -1)
 		eng->cam.pos.x = next;
