@@ -1,5 +1,7 @@
 NAME=	Cub3d
 
+detected_OS := $(shell uname)
+
 FILE=	main.c				ft_parsing.c			ft_parsing_map.c	\
 		ft_cub_utils.c		ft_events.c				ft_keys.c			\
 		ft_init_engine.c	ft_raycasting.c			ft_engine.c			\
@@ -28,8 +30,14 @@ INCL=		-I includes/
 
 INCL_BNS=	-I includes_bonus/
 
-CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I /usr/local/include	\
--L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11	-lm #-g3 -fsanitize=address
+ifeq ($(detected_OS),Darwin)        # Mac OS X
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I /usr/local/include    \
+-L lib42/ -L /usr/local/lib -lmlx -l42 -framework OpenGL -framework AppKit    -lm #-g3 -fsanitize=address
+endif
+ifeq ($(detected_OS),Linux)
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I /usr/local/include    \
+-L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11    -lm #-g3 -fsanitize=address
+endif
 
 all: $(NAME)
 
