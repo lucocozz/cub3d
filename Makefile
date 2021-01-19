@@ -31,8 +31,8 @@ INCL=		-I includes/
 INCL_BNS=	-I includes_bonus/
 
 ifeq ($(detected_OS),Darwin)        # Mac OS X
-    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I /usr/local/include    \
--L lib42/ -L /usr/local/lib -lmlx -l42 -framework OpenGL -framework AppKit -lm #-g3 -fsanitize=address
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
+-L lib42/ -L ./mlx/ -lmlx -l42 -framework OpenGL -framework AppKit -lm #-g3 -fsanitize=address
 endif
 ifeq ($(detected_OS),Linux)
     CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
