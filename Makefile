@@ -35,8 +35,8 @@ ifeq ($(detected_OS),Darwin)        # Mac OS X
 -L lib42/ -L /usr/local/lib -lmlx -l42 -framework OpenGL -framework AppKit -lm #-g3 -fsanitize=address
 endif
 ifeq ($(detected_OS),Linux)
-    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I /usr/local/include    \
--L lib42/ -L /usr/local/lib -lmlx -l42 -lXext -lX11 -lm #-g3 -fsanitize=address
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
+-L lib42/ -L ./mlx/ -lmlx_Linux -l42 -lXext -lX11 -lm #-g3 -fsanitize=address
 endif
 
 all: $(NAME)
