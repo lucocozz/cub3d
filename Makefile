@@ -1,13 +1,13 @@
-NAME=	Cub3d
+NAME=	cub3d
 
 detected_OS := $(shell uname)
 
-FILE=	main.c				ft_parsing.c			ft_parsing_map.c	\
-		ft_cub_utils.c		ft_events.c				ft_keys.c			\
-		ft_init_engine.c	ft_raycasting.c			ft_engine.c			\
-		ft_bmp.c			ft_keys2.c				ft_textures.c		\
-		ft_parsing_sprite.c	ft_exit_cub.c			ft_sprites.c		\
-		ft_sprite_lst.c
+FILE=	main.c					ft_parsing.c			ft_parsing_map.c		\
+		ft_cub_utils.c			ft_events.c				ft_keys.c				\
+		ft_init_engine.c		ft_raycasting.c			ft_engine.c				\
+		ft_bmp.c				ft_keys2.c				ft_textures.c			\
+		ft_parsing_sprite.c		ft_exit_cub.c			ft_sprites.c			\
+		ft_sprite_lst.c			ft_screen.c				ft_drawing.c
 
 BNS= 	main_bonus.c			ft_parsing_bonus.c		ft_parsing_map_bonus.c	\
 		ft_parse_utils_bonus.c	ft_events_bonus.c		ft_keys_bonus.c			\
@@ -31,18 +31,19 @@ INCL=		-I includes/
 INCL_BNS=	-I includes_bonus/
 
 ifeq ($(detected_OS),Darwin)        # Mac OS X
-    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./minilibx-linux/    \
 -L lib42/ -L ./mlx/ -lmlx -l42 -framework OpenGL -framework AppKit -lm #-g3 -fsanitize=address
 endif
 ifeq ($(detected_OS),Linux)
-    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
--L lib42/ -L ./mlx/ -lmlx_Linux -l42 -lXext -lX11 -lm #-g3 -fsanitize=address
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./minilibx-linux/    \
+-L lib42/ -L ./mlx/ -lmlx -l42 -lXext -lX11 -lm #-g3 -fsanitize=address
 endif
 
 all: $(NAME)
 
 lib:
 	$(MAKE) -C lib42
+	$(MAKE) -C minilibx-linux
 
 $(NAME): lib
 	$(CC) $(SRCS) -o $(NAME) $(CFLAGS) $(INCL)
@@ -54,6 +55,7 @@ clean:
 	rm -f $(OBJS_S)
 	rm -f $(OBJS_BNS)
 	$(MAKE) clean -C lib42
+	$(MAKE) clean -C minilibx-linux
 
 fclean: clean
 	rm -f $(NAME)

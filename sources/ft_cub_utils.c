@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 21:38:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/06 22:07:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/08 16:38:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,8 @@ t_parsing		ft_init_parsing(void)
 	i = 0;
 	while (i < N_COLORS)
 		((int *)(&parse.color))[i++] = -1;
-	i = 0;
-	while (i < 2)
-		((int *)(&parse.size))[i++] = 0;
+	parse.size.x = 0;
+	parse.size.y = 0;
 	parse.map.array = NULL;
 	parse.map.x = 0;
 	parse.map.y = 0;

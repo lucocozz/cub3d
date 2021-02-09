@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 20:04:37 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/09 16:00:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void		ft_parse_color(t_parsing *parse, char **data)
 		ft_free_matrice((void **)rgb, 3);
 		ft_exit_parsing(parse, "Bad rgb format.\n");
 	}
+	if (((int *)(&parse->color))[i] != -1)
+		ft_exit_parsing(parse, "Color already set.\n");
 	((int *)(&parse->color))[i] += ft_atoi(rgb[0]) << 16;
 	((int *)(&parse->color))[i] += ft_atoi(rgb[1]) << 8;
 	((int *)(&parse->color))[i] += ft_atoi(rgb[2]);
@@ -61,13 +63,17 @@ void		ft_parse_resolution(t_parsing *parse, char **data)
 		ft_free_matrice((void **)data, 3);
 		ft_exit_parsing(parse, "Bad resolution format.\n");
 	}
+	if (parse->size.x != 0 && parse->size.y != 0)
+		ft_exit_parsing(parse, "Resolution already set.\n");
 	parse->size.x = ft_atoi(data[1]);
 	parse->size.y = ft_atoi(data[2]);
+	ft_free_matrice((void**)data, 3);
+	if (parse->size.x <= 0 || parse->size.y <= 0)
+		ft_exit_parsing(parse, "Null or negative resolution value.\n");
 	if (parse->size.x > DISPLAY_X)
 		parse->size.x = DISPLAY_X;
 	if (parse->size.y > DISPLAY_Y)
 		parse->size.y = DISPLAY_Y;
-	ft_free_matrice((void**)data, 3);
 }
 
 void		ft_parse_textures(t_parsing *parse, char **data)
@@ -83,7 +89,10 @@ void		ft_parse_textures(t_parsing *parse, char **data)
 	}
 	while (ft_strcmp(data[0], g_texture[i].hash))
 		i++;
-	((char **)(&parse->texture))[i] = data[1];
+	if (((char **)(&parse->texture))[i] == NULL)
+		((char **)(&parse->texture))[i] = data[1];
+	else
+		ft_exit_parsing(parse, "Texture already set.\n");
 	if (!ft_endswith(((char **)(&parse->texture))[i], ".xpm"))
 		ft_exit_parsing(parse, "No xpm file.\n");
 	if ((fd = open(((char **)(&parse->texture))[i], O_RDONLY)) < 0)
@@ -105,6 +114,7 @@ void		ft_parse_data(t_parsing *parse, char *line)
 	if ((len = ft_matrice_len(data)) == 1)
 	{
 		ft_strdel(line);
+		ft_print_matrice(data);
 		ft_free_matrice((void **)data, len);
 		ft_exit_parsing(parse, "Data can't be parsed.\n");
 	}
@@ -113,6 +123,7 @@ void		ft_parse_data(t_parsing *parse, char *line)
 	if (i == N_DATA)
 	{
 		ft_strdel(line);
+		ft_print_matrice(data);
 		ft_free_matrice((void **)data, len);
 		ft_exit_parsing(parse, "Unreconized data.\n");
 	}

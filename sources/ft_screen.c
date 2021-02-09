@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_screen_bonus.c                                  :+:      :+:    :+:   */
+/*   ft_screen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/03 16:13:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/02/09 17:20:01 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/02/09 16:10:58 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/02/09 17:22:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d_bonus.h"
+#include "cub3d.h"
 
 void		ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
 {
@@ -27,17 +27,6 @@ void		ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx)
 		ft_draw(eng, mlx, *parse, &ray);
 		eng->z_buff[x++] = ray.pw_dist;
 	}
-}
-
-void		ft_draw(t_engine *eng, t_mlx *mlx, t_parsing parse, t_raycast *ray)
-{
-	int				i;
-	t_texture_data	*texture;
-
-	texture = NULL;
-	if ((i = ft_strchri(WALLS, parse.map.array[ray->map.y][ray->map.x])) > -1)
-		texture = &((t_texture_data *)(&eng->texture))[i];
-	ft_texturing((t_garbage){&parse, mlx, eng}, texture, ray);
 }
 
 void		ft_clear_screen(t_mlx *mlx, t_parsing *parse)
@@ -66,7 +55,6 @@ void		ft_clear_screen(t_mlx *mlx, t_parsing *parse)
 
 void		ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 {
-	ft_box(*parse, &eng->box, eng->cam, mlx);
 	ft_raycast(parse, eng, mlx);
 	ft_sprite(eng, mlx, parse);
 }
@@ -74,6 +62,5 @@ void		ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 void		ft_display_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx)
 {
 	ft_get_screen(eng, parse, mlx);
-	ft_draw_reticle(mlx, *parse);
 	mlx_put_image_to_window(mlx->ptr, mlx->win, mlx->img.ptr, 0, 0);
 }

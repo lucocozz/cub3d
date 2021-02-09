@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 19:05:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/01/14 16:53:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/09 18:10:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,10 @@ int		ft_exit_cub(t_garbage *garb)
 	mlx_destroy_image(garb->mlx->ptr, garb->engine->box.floor.img.ptr);
 	mlx_destroy_image(garb->mlx->ptr, garb->engine->box.celling.img.ptr);
 	ft_free_sprite(garb);
-	if (garb->mlx->img.ptr)
-		mlx_destroy_image(garb->mlx->ptr, garb->mlx->img.ptr);
-	if (garb->mlx->win)
-		mlx_destroy_window(garb->mlx->ptr, garb->mlx->win);
+	mlx_destroy_image(garb->mlx->ptr, garb->mlx->img.ptr);
+	mlx_destroy_window(garb->mlx->ptr, garb->mlx->win);
+	mlx_destroy_display(garb->mlx->ptr);
+	free(garb->mlx->ptr);
 	ft_memdel((void**)&garb->engine->z_buff);
 	exit(EXIT_SUCCESS);
 	return (0);

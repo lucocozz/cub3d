@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/11 22:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/31 16:37:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/08 12:55:11 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,15 @@ void		ft_parse_resolution(t_parsing *parse, char **data)
 		ft_free_matrice((void **)data, 3);
 		ft_exit_parsing(parse, "Bad resolution format.\n");
 	}
-	parse->size.x = ft_atoi(data[1]);
-	parse->size.y = ft_atoi(data[2]);
+	parse->size.x = ft_atoui(data[1]);
+	parse->size.y = ft_atoui(data[2]);
+	ft_free_matrice((void**)data, 3);
+	if (parse->size.x <= 0 || parse->size.y <= 0)
+		ft_exit_parsing(parse, "Null or negative resolution value.\n");
 	if (parse->size.x > DISPLAY_X)
 		parse->size.x = DISPLAY_X;
 	if (parse->size.y > DISPLAY_Y)
 		parse->size.y = DISPLAY_Y;
-	ft_free_matrice((void**)data, 3);
 }
 
 void		ft_parse_textures(t_parsing *parse, char **data)
