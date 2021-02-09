@@ -31,11 +31,11 @@ INCL=		-I includes/
 INCL_BNS=	-I includes_bonus/
 
 ifeq ($(detected_OS),Darwin)        # Mac OS X
-    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./minilibx-linux/    \
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
 -L lib42/ -L ./mlx/ -lmlx -l42 -framework OpenGL -framework AppKit -lm #-g3 -fsanitize=address
 endif
 ifeq ($(detected_OS),Linux)
-    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./minilibx-linux/    \
+    CFLAGS= -Wall -Wextra -Werror -I lib42/includes/ -I ./mlx/    \
 -L lib42/ -L ./mlx/ -lmlx -l42 -lXext -lX11 -lm #-g3 -fsanitize=address
 endif
 
@@ -43,7 +43,7 @@ all: $(NAME)
 
 lib:
 	$(MAKE) -C lib42
-	$(MAKE) -C minilibx-linux
+	$(MAKE) -C mlx
 
 $(NAME): lib
 	$(CC) $(SRCS) -o $(NAME) $(CFLAGS) $(INCL)
@@ -55,7 +55,7 @@ clean:
 	rm -f $(OBJS_S)
 	rm -f $(OBJS_BNS)
 	$(MAKE) clean -C lib42
-	$(MAKE) clean -C minilibx-linux
+	$(MAKE) clean -C mlx
 
 fclean: clean
 	rm -f $(NAME)
