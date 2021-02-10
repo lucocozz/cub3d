@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 22:42:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/02/09 16:09:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:56:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int		ft_right_key(t_garbage *garb)
 	* sin(eng->rot_s);
 	eng->cam.plane.y = old_plane * sin(eng->rot_s) + eng->cam.plane.y
 	* cos(eng->rot_s);
-	// ft_display_img(eng, garb->parse, garb->mlx);
 	return (1);
 }
 
@@ -50,6 +49,5 @@ int		ft_left_key(t_garbage *garb)
 	* sin(-eng->rot_s);
 	eng->cam.plane.y = old_plane * sin(-eng->rot_s) + eng->cam.plane.y
 	* cos(-eng->rot_s);
-	// ft_display_img(eng, garb->parse, garb->mlx);
 	return (1);
 }

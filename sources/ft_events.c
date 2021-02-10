@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 01:05:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/02/09 18:52:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:32:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,11 @@ void		ft_events_hook(t_garbage garbage)
 	t_mlx	*mlx;
 
 	mlx = garbage.mlx;
-	mlx_hook(mlx->win, DESTROYNOTIFY, 0, &mlx_loop_end, mlx->ptr);
+	mlx_hook(mlx->win, DESTROYNOTIFY, 0, &ft_exit_cub, (void*)&garbage);
 	mlx_hook(mlx->win, KEYPRESS, 1, &ft_press_event, (void*)&garbage);
 	mlx_hook(mlx->win, KEYRELEASE, 2, &ft_release_event, (void*)&garbage);
 	mlx_loop_hook(mlx->ptr, &ft_loop_event, (void*)&garbage);
 	mlx_loop(mlx->ptr);
-	ft_exit_cub(&garbage);
 }
 
 int			ft_press_event(int key, t_garbage *garb)

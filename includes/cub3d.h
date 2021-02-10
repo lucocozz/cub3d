@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 22:07:11 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/02/09 16:54:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/10 16:51:53 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,7 +268,7 @@ t_mlx				ft_init_mlx(t_parsing parse);
 t_engine			ft_init_engine(t_parsing *parse);
 void				ft_raycast(t_parsing *parse, t_engine *eng, t_mlx *mlx);
 t_raycast			ft_ray(t_camera cam, t_parsing parse, int x);
-		
+
 void				ft_get_screen(t_engine *eng, t_parsing *parse, t_mlx *mlx);
 void				ft_clear_screen(t_mlx *mlx, t_parsing *parse);
 void				ft_display_screen(t_engine *eng, t_parsing *parse,

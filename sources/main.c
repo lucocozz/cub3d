@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/10 23:18:22 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/02/09 16:54:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/10 16:37:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void		ft_win(t_garbage garb, int save)
+static void	ft_win(t_garbage garb, int save)
 {
 	t_mlx		*mlx;
 	t_parsing	*parse;

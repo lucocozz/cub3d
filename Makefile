@@ -4,10 +4,10 @@ detected_OS := $(shell uname)
 
 FILE=	main.c					ft_parsing.c			ft_parsing_map.c		\
 		ft_cub_utils.c			ft_events.c				ft_keys.c				\
-		ft_init_engine.c		ft_raycasting.c			ft_engine.c				\
+		ft_init_engine.c		ft_raycasting.c			ft_drawing.c			\
 		ft_bmp.c				ft_keys2.c				ft_textures.c			\
 		ft_parsing_sprite.c		ft_exit_cub.c			ft_sprites.c			\
-		ft_sprite_lst.c			ft_screen.c				ft_drawing.c
+		ft_sprite_lst.c			ft_screen.c				
 
 BNS= 	main_bonus.c			ft_parsing_bonus.c		ft_parsing_map_bonus.c	\
 		ft_parse_utils_bonus.c	ft_events_bonus.c		ft_keys_bonus.c			\

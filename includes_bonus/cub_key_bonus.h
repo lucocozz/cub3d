@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/21 07:34:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/01/14 16:44:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:34:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@
 
 #  define KEYPRESS 2
 #  define KEYRELEASE 3
-#  define DESTROYNOTIFY 17
+#  define DESTROYNOTIFY 33
 
 #  define A_KEY 97
 #  define D_KEY 100

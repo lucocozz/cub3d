@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/26 17:20:41 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/02/09 16:09:06 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/10 15:56:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	ft_collision(const int nb, const char *str)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -43,7 +43,6 @@ int			ft_w_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x + eng->cam.dir.x * eng->move_s)], COLLISION) == 0)
 		eng->cam.pos.x += eng->cam.dir.x * eng->move_s;
-	// ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
@@ -62,7 +61,6 @@ int			ft_s_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x - eng->cam.dir.x * eng->move_s)], COLLISION) == 0)
 		eng->cam.pos.x -= eng->cam.dir.x * eng->move_s;
-	// ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
@@ -81,7 +79,6 @@ int			ft_a_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x - eng->cam.plane.x * eng->move_s)], COLLISION) == 0)
 		eng->cam.pos.x -= eng->cam.plane.x * eng->move_s;
-	// ft_display_img(eng, parse, mlx);
 	return (1);
 }
 
@@ -100,6 +97,5 @@ int			ft_d_key(t_garbage *garb)
 	if (ft_collision(eng->map.array[(int)eng->cam.pos.y]
 	[(int)(eng->cam.pos.x + eng->cam.plane.x * eng->move_s)], COLLISION) == 0)
 		eng->cam.pos.x += eng->cam.plane.x * eng->move_s;
-	// ft_display_img(eng, parse, mlx);
 	return (1);
 }
