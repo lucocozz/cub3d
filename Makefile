@@ -24,7 +24,7 @@ OBJS_S=		$(SRCS:%.c=%.o)
 
 OBJS_BNS=	$(BONUS:%.c=%.o)
 
-CC=clang
+CC=gcc
 
 INCL=		-I includes/
 

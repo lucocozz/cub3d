@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 17:26:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/01/14 16:34:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/16 15:29:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static t_pixel	**ft_get_pixels(t_parsing *parse, t_mlx *mlx, t_bmp bmp)
 	t_coord					axe;
 	t_pixel					**pixels;
 
+	axe.y = 0;
 	pixels = (t_pixel**)ft_malloc_matrice(parse->size.x, parse->size.y,
 	sizeof(t_pixel*), sizeof(t_pixel));
 	while (axe.y < parse->size.y)
@@ -47,11 +48,11 @@ static t_pixel	**ft_get_pixels(t_parsing *parse, t_mlx *mlx, t_bmp bmp)
 		while (axe.x < parse->size.x)
 		{
 			bmp.pixel.r = (mlx->img.data[axe.y * parse->size.x + axe.x]
-			& RED) >> 16;
+				& RED) >> 16;
 			bmp.pixel.g = (mlx->img.data[axe.y * parse->size.x + axe.x]
-			& GREEN) >> 8;
+				& GREEN) >> 8;
 			bmp.pixel.b = (mlx->img.data[axe.y * parse->size.x + axe.x]
-			& BLUE);
+				& BLUE);
 			pixels[axe.y][axe.x] = bmp.pixel;
 			axe.x++;
 		}
