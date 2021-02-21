@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/18 19:35:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2020/05/07 17:45:29 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/02/21 13:24:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,10 @@
 static t_sprite_lst	*ft_create_sprite(t_garbage *garb, t_coord axe, int texture)
 {
 	t_mlx			*mlx;
-	t_engine		*eng;
 	t_parsing		*parse;
 	t_sprite_lst	*sprite;
 
 	mlx = (t_mlx*)garb->mlx;
-	eng = (t_engine*)garb->engine;
 	parse = (t_parsing*)garb->parse;
 	if ((sprite = malloc(sizeof(t_sprite_lst) * 1)) == NULL)
 		return (NULL);
